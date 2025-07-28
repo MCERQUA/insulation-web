@@ -145,8 +145,9 @@ const ScrollStorySystem: React.FC = () => {
       setScrollProgress(progress);
       
       // Calculate which scene should be active
-      const sceneIndex = Math.floor(progress * storyScenes.length);
-      const clampedIndex = Math.min(sceneIndex, storyScenes.length - 1);
+      // When progress is 0, we want scene 0, when progress is 1, we want the last scene
+      const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
+      const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
       
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
