@@ -3,7 +3,14 @@ import { motion } from 'framer-motion';
 import LightRays from '../ui/LightRays.tsx';
 ---
 
-<section class="hero-section hero-background hero-fallback relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden">
+<section class="hero-section relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden" style="
+  background-image: url('/attics/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #1e40af;
+">
   <!-- Light rays background effect -->
   <LightRays 
     raysOrigin="top-center"
