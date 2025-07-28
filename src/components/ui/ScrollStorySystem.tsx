@@ -145,15 +145,10 @@ const ScrollStorySystem: React.FC = () => {
       
       setScrollProgress(progress);
       
-      // Calculate which scene should be active with more granular control
-      // Add some buffer zones between scenes for smoother transitions
-      const totalScenes = storyScenes.length;
-      const progressPerScene = 1 / (totalScenes - 1);
-      const currentSceneFloat = progress / progressPerScene;
-      
-      // Only change scene when we've scrolled significantly into the next section
-      const sceneIndex = Math.floor(currentSceneFloat + 0.3); // Add 0.3 buffer for smoother transitions
-      const clampedIndex = Math.min(Math.max(sceneIndex, 0), totalScenes - 1);
+      // Calculate which scene should be active
+      // Simple calculation that works with the larger scroll area
+      const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
+      const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
       
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
