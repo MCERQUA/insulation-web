@@ -133,6 +133,7 @@ const ScrollStorySystem: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [backgroundImage, setBackgroundImage] = useState(storyScenes[0].image);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -155,17 +156,29 @@ const ScrollStorySystem: React.FC = () => {
       }
     };
 
-    // Set initial tall height for scrolling
-    document.body.style.height = '1000vh';
-    
+    // Initialize everything
+    const initialize = () => {
+      // Set initial tall height for scrolling
+      document.body.style.height = '1000vh';
+      
+      // Ensure we start at scene 0
+      setCurrentScene(0);
+      setBackgroundImage(storyScenes[0].image);
+      setScrollProgress(0);
+      setIsInitialized(true);
+      
+      // Scroll to top to ensure we start at scene 0
+      window.scrollTo(0, 0);
+    };
+
+    initialize();
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.body.style.height = 'auto';
     };
-  }, [currentScene]);
+  }, []); // Remove currentScene dependency to prevent loops
 
   const currentStoryScene = storyScenes[currentScene];
 
@@ -202,7 +215,7 @@ const ScrollStorySystem: React.FC = () => {
           {/* Top section - Title and Subtitle */}
           <motion.div
             key={`top-${currentScene}`}
-            className="pt-20 pb-4 px-4 md:px-8 text-center"
+            className="pt-32 pb-4 px-4 md:px-8 text-center"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
