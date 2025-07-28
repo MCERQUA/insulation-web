@@ -50,7 +50,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 sm:flex sm:items-center sm:justify-center sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -64,9 +64,9 @@ export function ContactModal({ onClose }: ContactModalProps) {
         exit={{ opacity: 0 }}
       />
 
-      {/* Modal */}
+      {/* Modal - Full screen on mobile, centered on desktop */}
       <motion.div
-        className="relative w-full max-w-md"
+        className="relative w-full h-full sm:w-full sm:max-w-md sm:h-auto sm:my-0 overflow-y-auto sm:overflow-visible"
         initial={{ scale: 0.8, opacity: 0, y: 50 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -78,68 +78,71 @@ export function ContactModal({ onClose }: ContactModalProps) {
       >
         <GlassSurface
           width="100%"
-          height="auto"
-          borderRadius={20}
+          height="100%"
+          borderRadius={0}
           brightness={90}
           opacity={0.95}
           blur={25}
           backgroundOpacity={0.2}
           saturation={1.2}
-          className="p-6"
+          className="h-full sm:h-auto sm:rounded-[20px] p-6 sm:p-6 flex flex-col"
         >
           {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-1">Get Free Estimate</h2>
+          <div className="flex items-start justify-between mb-6 flex-shrink-0">
+            <div className="flex-1">
+              <h2 className="text-2xl font-bold text-white mb-2">Get Free Estimate</h2>
               <p className="text-white/80 text-sm">We'll get back to you within 24 hours</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="p-3 rounded-full hover:bg-white/10 transition-colors ml-4 flex-shrink-0"
             >
-              <X size={20} className="text-white/80" />
+              <X size={24} className="text-white/80" />
             </button>
           </div>
 
           {isSubmitted ? (
             /* Success Message */
-            <motion.div
-              className="text-center py-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <div className="flex-1 flex items-center justify-center">
               <motion.div
-                className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4"
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
               >
-                <Send size={24} className="text-green-400" />
+                <motion.div
+                  className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                >
+                  <Send size={28} className="text-green-400" />
+                </motion.div>
+                <h3 className="text-2xl font-semibold text-white mb-3">Message Sent!</h3>
+                <p className="text-white/80 text-lg">We'll contact you soon with your free estimate.</p>
               </motion.div>
-              <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
-              <p className="text-white/80">We'll contact you soon with your free estimate.</p>
-            </motion.div>
+            </div>
           ) : (
             /* Contact Form */
-            <form
-              name="contact"
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              onSubmit={handleSubmit}
-              className="space-y-4"
-            >
+            <div className="flex-1 flex flex-col">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="flex-1 flex flex-col space-y-4"
+              >
               {/* Netlify form detection */}
               <input type="hidden" name="form-name" value="contact" />
               <input type="hidden" name="bot-field" />
 
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="name" className="block text-base font-medium text-white/90 mb-3">
                   Full Name *
                 </label>
                 <input
@@ -147,14 +150,14 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="John Smith"
                 />
               </div>
 
               {/* Phone Field */}
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="phone" className="block text-base font-medium text-white/90 mb-3">
                   Phone Number *
                 </label>
                 <input
@@ -162,42 +165,42 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   id="phone"
                   name="phone"
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="(555) 123-4567"
                 />
               </div>
 
               {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="email" className="block text-base font-medium text-white/90 mb-3">
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="john@example.com"
                 />
               </div>
 
               {/* Address Field */}
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="address" className="block text-base font-medium text-white/90 mb-3">
                   Property Address
                 </label>
                 <input
                   type="text"
                   id="address"
                   name="address"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="123 Main St, City, State"
                 />
               </div>
 
               {/* Service Type */}
               <div>
-                <label htmlFor="service" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="service" className="block text-base font-medium text-white/90 mb-3">
                   Service Needed
                 </label>
                 <select
@@ -215,7 +218,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
 
               {/* Message Field */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-white/90 mb-2">
+                <label htmlFor="message" className="block text-base font-medium text-white/90 mb-3">
                   Additional Details
                 </label>
                 <textarea
@@ -231,7 +234,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 text-white font-semibold py-4 px-6 text-lg rounded-xl transition-colors flex items-center justify-center gap-2 mt-6"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -246,29 +249,28 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   </>
                 ) : (
                   <>
-                    <Send size={18} />
+                    <Send size={20} />
                     Get Free Estimate
                   </>
                 )}
               </motion.button>
-            </form>
-          )}
-
-          {/* Contact Info */}
-          {!isSubmitted && (
-            <div className="mt-6 pt-6 border-t border-white/20">
-              <div className="flex items-center justify-center gap-6 text-sm text-white/80">
-                <div className="flex items-center gap-1">
-                  <Phone size={14} className="text-green-400" />
-                  <span>Call Now</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Mail size={14} className="text-green-400" />
-                  <span>24hr Response</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <MapPin size={14} className="text-green-400" />
-                  <span>Local Experts</span>
+              </form>
+              
+              {/* Contact Info */}
+              <div className="mt-6 pt-6 border-t border-white/20 flex-shrink-0">
+                <div className="flex items-center justify-center gap-6 text-sm text-white/80">
+                  <div className="flex items-center gap-2">
+                    <Phone size={16} className="text-green-400" />
+                    <span>Call Now</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Mail size={16} className="text-green-400" />
+                    <span>24hr Response</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin size={16} className="text-green-400" />
+                    <span>Local Experts</span>
+                  </div>
                 </div>
               </div>
             </div>
