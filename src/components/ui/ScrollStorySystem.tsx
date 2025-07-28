@@ -221,110 +221,207 @@ const ScrollStorySystem: React.FC = () => {
       {/* Story content container */}
       <div 
         ref={containerRef}
-        className="fixed inset-0 z-20 flex flex-col justify-between"
+        className="fixed inset-0 z-20"
       >
         <AnimatePresence mode="wait">
-          {/* Top section - Title and Subtitle */}
-          <motion.div
-            key={`top-${currentScene}`}
-            className="pt-32 pb-4 px-4 md:px-8 text-center"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Title */}
-            <div className="mb-4">
-              <CinematicText
-                text={currentStoryScene.title}
-                type={currentStoryScene.titleAnimation}
-                className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider leading-tight text-center"
-                style={{
-                  textShadow: `
-                    0 0 10px rgba(0, 0, 0, 0.9),
-                    0 0 20px rgba(0, 0, 0, 0.8),
-                    0 0 30px rgba(0, 0, 0, 0.7),
-                    2px 2px 4px rgba(0, 0, 0, 1),
-                    4px 4px 8px rgba(0, 0, 0, 0.8)
-                  `
-                }}
-                duration={0.8}
-                splitBy="words"
-                trigger={true}
-              />
-            </div>
-            
-            {/* Subtitle */}
-            {currentStoryScene.subtitle && (
-              <div>
+          {currentScene === 0 ? (
+            /* First scene - Centered layout */
+            <motion.div
+              key="intro-scene"
+              className="flex flex-col items-center justify-center h-full px-4 md:px-8 text-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Title */}
+              <div className="mb-6">
                 <CinematicText
-                  text={currentStoryScene.subtitle}
-                  type="fade"
-                  className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
+                  text={currentStoryScene.title}
+                  type={currentStoryScene.titleAnimation}
+                  className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-wider leading-tight text-center"
                   style={{
                     textShadow: `
-                      0 0 8px rgba(0, 0, 0, 0.9),
-                      0 0 16px rgba(0, 0, 0, 0.8),
+                      0 0 15px rgba(0, 0, 0, 0.9),
+                      0 0 30px rgba(0, 0, 0, 0.8),
+                      0 0 45px rgba(0, 0, 0, 0.7),
+                      3px 3px 6px rgba(0, 0, 0, 1),
+                      6px 6px 12px rgba(0, 0, 0, 0.8)
+                    `
+                  }}
+                  duration={0.8}
+                  splitBy="words"
+                  trigger={true}
+                />
+              </div>
+              
+              {/* Subtitle */}
+              {currentStoryScene.subtitle && (
+                <div className="mb-8">
+                  <CinematicText
+                    text={currentStoryScene.subtitle}
+                    type="fade"
+                    className="text-2xl md:text-3xl font-bold text-yellow-300 tracking-wide"
+                    style={{
+                      textShadow: `
+                        0 0 12px rgba(0, 0, 0, 0.9),
+                        0 0 24px rgba(0, 0, 0, 0.8),
+                        3px 3px 6px rgba(0, 0, 0, 1),
+                        4px 4px 8px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={0.6}
+                    delay={0.3}
+                    trigger={true}
+                  />
+                </div>
+              )}
+              
+              {/* Description */}
+              <div className="mb-12">
+                <CinematicText
+                  text={currentStoryScene.description}
+                  type={currentStoryScene.textAnimation}
+                  className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                  style={{
+                    textShadow: `
+                      0 0 10px rgba(0, 0, 0, 0.9),
+                      0 0 20px rgba(0, 0, 0, 0.8),
                       2px 2px 4px rgba(0, 0, 0, 1),
                       3px 3px 6px rgba(0, 0, 0, 0.8)
                     `
                   }}
-                  duration={0.6}
-                  delay={0.3}
+                  duration={1.2}
+                  delay={0.6}
+                  splitBy="words"
                   trigger={true}
                 />
               </div>
-            )}
-          </motion.div>
+              
+              {/* Scene indicator */}
+              <div className="flex justify-center space-x-2">
+                {storyScenes.map((_, index) => (
+                  <motion.div
+                    key={index}
+                    className={`w-3 h-3 rounded-full ${
+                      index === currentScene ? 'bg-yellow-400' : 'bg-white/40'
+                    }`}
+                    style={{
+                      boxShadow: '0 0 8px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6)'
+                    }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            /* Other scenes - Top/Bottom layout */
+            <div className="flex flex-col justify-between h-full">
+              {/* Top section - Title and Subtitle */}
+              <motion.div
+                key={`top-${currentScene}`}
+                className="pt-32 pb-4 px-4 md:px-8 text-center"
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Title */}
+                <div className="mb-4">
+                  <CinematicText
+                    text={currentStoryScene.title}
+                    type={currentStoryScene.titleAnimation}
+                    className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider leading-tight text-center"
+                    style={{
+                      textShadow: `
+                        0 0 10px rgba(0, 0, 0, 0.9),
+                        0 0 20px rgba(0, 0, 0, 0.8),
+                        0 0 30px rgba(0, 0, 0, 0.7),
+                        2px 2px 4px rgba(0, 0, 0, 1),
+                        4px 4px 8px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={0.8}
+                    splitBy="words"
+                    trigger={true}
+                  />
+                </div>
+                
+                {/* Subtitle */}
+                {currentStoryScene.subtitle && (
+                  <div>
+                    <CinematicText
+                      text={currentStoryScene.subtitle}
+                      type="fade"
+                      className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
+                      style={{
+                        textShadow: `
+                          0 0 8px rgba(0, 0, 0, 0.9),
+                          0 0 16px rgba(0, 0, 0, 0.8),
+                          2px 2px 4px rgba(0, 0, 0, 1),
+                          3px 3px 6px rgba(0, 0, 0, 0.8)
+                        `
+                      }}
+                      duration={0.6}
+                      delay={0.3}
+                      trigger={true}
+                    />
+                  </div>
+                )}
+              </motion.div>
 
-          {/* Bottom section - Description and Scene indicator */}
-          <motion.div
-            key={`bottom-${currentScene}`}
-            className="pb-20 pt-4 px-4 md:px-8 text-center"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            {/* Description */}
-            <div className="mb-8">
-              <CinematicText
-                text={currentStoryScene.description}
-                type={currentStoryScene.textAnimation}
-                className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
-                style={{
-                  textShadow: `
-                    0 0 8px rgba(0, 0, 0, 0.9),
-                    0 0 16px rgba(0, 0, 0, 0.8),
-                    1px 1px 3px rgba(0, 0, 0, 1),
-                    2px 2px 6px rgba(0, 0, 0, 0.8)
-                  `
-                }}
-                duration={1.2}
-                delay={0.6}
-                splitBy="words"
-                trigger={true}
-              />
+              {/* Bottom section - Description and Scene indicator */}
+              <motion.div
+                key={`bottom-${currentScene}`}
+                className="pb-32 pt-4 px-4 md:px-8 text-center"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {/* Description */}
+                <div className="mb-8">
+                  <CinematicText
+                    text={currentStoryScene.description}
+                    type={currentStoryScene.textAnimation}
+                    className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                    style={{
+                      textShadow: `
+                        0 0 8px rgba(0, 0, 0, 0.9),
+                        0 0 16px rgba(0, 0, 0, 0.8),
+                        1px 1px 3px rgba(0, 0, 0, 1),
+                        2px 2px 6px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={1.2}
+                    delay={0.6}
+                    splitBy="words"
+                    trigger={true}
+                  />
+                </div>
+                
+                {/* Scene indicator */}
+                <div className="flex justify-center space-x-2">
+                  {storyScenes.map((_, index) => (
+                    <motion.div
+                      key={index}
+                      className={`w-3 h-3 rounded-full ${
+                        index === currentScene ? 'bg-yellow-400' : 'bg-white/40'
+                      }`}
+                      style={{
+                        boxShadow: '0 0 8px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6)'
+                      }}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
             </div>
-            
-            {/* Scene indicator */}
-            <div className="flex justify-center space-x-2">
-              {storyScenes.map((_, index) => (
-                <motion.div
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    index === currentScene ? 'bg-yellow-400' : 'bg-white/40'
-                  }`}
-                  style={{
-                    boxShadow: '0 0 8px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6)'
-                  }}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                />
-              ))}
-            </div>
-          </motion.div>
+          )}
         </AnimatePresence>
       </div>
       
