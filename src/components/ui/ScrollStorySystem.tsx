@@ -23,7 +23,7 @@ const storyScenes: StoryScene[] = [
     description: "Welcome to a journey that will reveal the hidden truth about what's happening above your head...",
     image: "/attics/background.jpg",
     textAnimation: 'focus',
-    titleAnimation: 'fade',
+    titleAnimation: 'lightInteraction',
     background: 'from-blue-900/20 to-indigo-900/20'
   },
   {
