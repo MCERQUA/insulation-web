@@ -158,8 +158,8 @@ const ScrollStorySystem: React.FC = () => {
 
     // Initialize everything
     const initialize = () => {
-      // Set larger height for extended scrolling - 5x more scroll distance (more reasonable)
-      document.body.style.height = '5000vh';
+      // Set shorter height for quicker scene transitions
+      document.body.style.height = '800vh';
       
       // Add touch-action for mobile support
       document.body.style.touchAction = 'pan-y';
