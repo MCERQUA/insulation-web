@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 
 // Create absolute URLs safely
-const siteUrl = Astro.site?.href || 'https://homeperformanceinsulation.com';
+const siteUrl = Astro.site?.href || 'https://insulation.netlify.app';
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : new URL(canonicalUrl, siteUrl).href;
 ---

@@ -336,12 +336,20 @@ const ScrollStorySystem: React.FC = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [isSnapping, setIsSnapping] = useState(false);
   const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
+    const checkIsMobile = window.innerWidth <= 768;
+    setIsMobile(checkIsMobile);
+    let lastScrollTime = Date.now();
     
     const handleScroll = () => {
-      if (!containerRef.current || isSnapping) return;
+      if (!containerRef.current) return;
+      
+      lastScrollTime = Date.now();
+      
+      // Don't update scenes while snapping
+      if (isSnapping) return;
       
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const currentScroll = window.scrollY;
@@ -356,24 +364,32 @@ const ScrollStorySystem: React.FC = () => {
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
         setBackgroundImage(storyScenes[clampedIndex].image);
-        
-        // On mobile, snap to scene after scroll stops
-        if (isMobile) {
-          if (snapTimeoutRef.current) {
-            clearTimeout(snapTimeoutRef.current);
-          }
-          
-          snapTimeoutRef.current = setTimeout(() => {
-            snapToScene(clampedIndex);
-          }, 150); // Snap after 150ms of no scrolling
+      }
+      
+      // On mobile, always snap to scene after scroll stops
+      if (checkIsMobile) {
+        if (snapTimeoutRef.current) {
+          clearTimeout(snapTimeoutRef.current);
         }
+        
+        snapTimeoutRef.current = setTimeout(() => {
+          // Only snap if enough time has passed since last scroll
+          if (Date.now() - lastScrollTime >= 100) {
+            snapToScene(clampedIndex);
+          }
+        }, 100);
       }
     };
     
     const snapToScene = (sceneIndex: number) => {
+      if (isSnapping) return;
+      
       setIsSnapping(true);
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const targetScroll = (sceneIndex / (storyScenes.length - 1)) * scrollHeight;
+      
+      // Prevent default scroll behavior during snap
+      document.body.style.overflow = 'hidden';
       
       window.scrollTo({
         top: targetScroll,
@@ -382,7 +398,8 @@ const ScrollStorySystem: React.FC = () => {
       
       setTimeout(() => {
         setIsSnapping(false);
-      }, 500); // Allow time for smooth scroll to complete
+        document.body.style.overflow = 'auto';
+      }, 800); // Longer timeout to ensure snap completes
     };
 
     // Initialize everything
@@ -411,29 +428,58 @@ const ScrollStorySystem: React.FC = () => {
     initialize();
     window.addEventListener('scroll', handleScroll);
     
-    // Add touch event support for mobile
+    // Add strict touch event support for mobile to prevent fast scrolling
     let touchStartY = 0;
     let touchEndY = 0;
+    let isScrolling = false;
     
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
+      if (checkIsMobile && !isSnapping) {
+        touchStartY = e.touches[0].clientY;
+        isScrolling = false;
+      }
     };
     
     const handleTouchMove = (e: TouchEvent) => {
-      // Allow normal scrolling behavior
-      touchEndY = e.touches[0].clientY;
+      if (checkIsMobile && !isSnapping) {
+        touchEndY = e.touches[0].clientY;
+        isScrolling = true;
+      }
+    };
+    
+    const handleTouchEnd = () => {
+      if (checkIsMobile && !isSnapping && isScrolling) {
+        const scrollDistance = Math.abs(touchStartY - touchEndY);
+        
+        // If user scrolled more than 50px, force snap to current scene
+        if (scrollDistance > 50) {
+          setTimeout(() => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const currentScroll = window.scrollY;
+            const progress = Math.min(currentScroll / scrollHeight, 1);
+            const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
+            const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
+            
+            snapToScene(clampedIndex);
+          }, 50);
+        }
+        isScrolling = false;
+      }
     };
     
     document.addEventListener('touchstart', handleTouchStart, { passive: true });
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
       document.body.style.height = 'auto';
       document.body.style.touchAction = 'auto';
       document.documentElement.style.touchAction = 'auto';
+      document.body.style.overflow = 'auto';
       
       if (snapTimeoutRef.current) {
         clearTimeout(snapTimeoutRef.current);
@@ -461,7 +507,7 @@ const ScrollStorySystem: React.FC = () => {
         className="fixed inset-0 z-0"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
-          backgroundSize: 'contain',
+          backgroundSize: currentScene === 0 ? 'cover' : (isMobile ? 'contain' : 'cover'),
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
