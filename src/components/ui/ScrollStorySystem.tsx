@@ -201,18 +201,18 @@ const ScrollStorySystem: React.FC = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentScene}
-            className="text-center max-w-4xl px-8"
+            className="text-center max-w-4xl px-4 md:px-8 w-full"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5 }}
           >
             {/* Title */}
-            <div className="mb-6">
+            <div className="mb-6 w-full flex justify-center">
               <CinematicText
                 text={currentStoryScene.title}
                 type={currentStoryScene.titleAnimation}
-                className="text-6xl md:text-8xl font-black text-white tracking-wider drop-shadow-2xl leading-tight"
+                className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-wider drop-shadow-2xl leading-tight text-center"
                 duration={0.8}
                 splitBy="words"
                 trigger={true}

@@ -201,13 +201,14 @@ const CinematicText: React.FC<CinematicTextProps> = ({
       animate={shouldAnimate ? "visible" : "hidden"}
       onAnimationComplete={onComplete}
       style={{
-        display: 'inline-flex',
+        display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
         perspective: '1000px',
         textAlign: 'center',
-        width: '100%'
+        width: '100%',
+        gap: '0.25em'
       }}
     >
       {type === 'typewriter' ? (
@@ -231,8 +232,7 @@ const CinematicText: React.FC<CinematicTextProps> = ({
               className="inline-block whitespace-nowrap"
               style={{
                 transformOrigin: 'center',
-                transformStyle: 'preserve-3d',
-                marginRight: index < elements.length - 1 ? '0.5em' : '0'
+                transformStyle: 'preserve-3d'
               }}
             >
               {element}
