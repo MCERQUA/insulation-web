@@ -334,10 +334,14 @@ const ScrollStorySystem: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [backgroundImage, setBackgroundImage] = useState('/attics/background.jpg'); // Force start with background.jpg
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isSnapping, setIsSnapping] = useState(false);
+  const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || isSnapping) return;
       
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const currentScroll = window.scrollY;
@@ -346,14 +350,39 @@ const ScrollStorySystem: React.FC = () => {
       setScrollProgress(progress);
       
       // Calculate which scene should be active
-      // Simple calculation that works with the larger scroll area
       const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
       const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
       
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
         setBackgroundImage(storyScenes[clampedIndex].image);
+        
+        // On mobile, snap to scene after scroll stops
+        if (isMobile) {
+          if (snapTimeoutRef.current) {
+            clearTimeout(snapTimeoutRef.current);
+          }
+          
+          snapTimeoutRef.current = setTimeout(() => {
+            snapToScene(clampedIndex);
+          }, 150); // Snap after 150ms of no scrolling
+        }
       }
+    };
+    
+    const snapToScene = (sceneIndex: number) => {
+      setIsSnapping(true);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const targetScroll = (sceneIndex / (storyScenes.length - 1)) * scrollHeight;
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+      
+      setTimeout(() => {
+        setIsSnapping(false);
+      }, 500); // Allow time for smooth scroll to complete
     };
 
     // Initialize everything
@@ -405,6 +434,10 @@ const ScrollStorySystem: React.FC = () => {
       document.body.style.height = 'auto';
       document.body.style.touchAction = 'auto';
       document.documentElement.style.touchAction = 'auto';
+      
+      if (snapTimeoutRef.current) {
+        clearTimeout(snapTimeoutRef.current);
+      }
     };
   }, []); // Remove currentScene dependency to prevent loops
 
@@ -428,7 +461,7 @@ const ScrollStorySystem: React.FC = () => {
         className="fixed inset-0 z-0"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
