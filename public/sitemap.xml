@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://homeperformanceinsulation.com/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://homeperformanceinsulation.com/images/INSULATION-360.jpg</image:loc>
+      <image:caption>Home Performance Insulation - Professional spray foam insulation, air sealing, and energy efficiency services</image:caption>
+      <image:title>Home Performance Insulation Services</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Blog Index -->
+  <url>
+    <loc>https://homeperformanceinsulation.com/blog/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://homeperformanceinsulation.com/blog/understanding-home-performance/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://homeperformanceinsulation.com/images/home-performance.jpg</image:loc>
+      <image:caption>Understanding Home Performance - A Complete Guide</image:caption>
+      <image:title>Home Performance and Energy Efficiency</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://homeperformanceinsulation.com/blog/spray-foam-insulation-benefits/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://homeperformanceinsulation.com/images/spray-foam.jpg</image:loc>
+      <image:caption>Spray Foam Insulation Benefits and Applications</image:caption>
+      <image:title>Professional Spray Foam Insulation</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://homeperformanceinsulation.com/blog/air-sealing-energy-efficiency/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://homeperformanceinsulation.com/images/air-sealing.jpg</image:loc>
+      <image:caption>Air Sealing and Energy Efficiency Solutions</image:caption>
+      <image:title>Professional Air Sealing Services</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://homeperformanceinsulation.com/blog/complete-home-insulation-guide/</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://homeperformanceinsulation.com/images/insulation-guide.jpg</image:loc>
+      <image:caption>Complete Home Insulation Guide</image:caption>
+      <image:title>Home Insulation Solutions</image:title>
+    </image:image>
+  </url>
+  
+  <!-- AI/LLM optimization file -->
+  <url>
+    <loc>https://homeperformanceinsulation.com/llms.txt</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

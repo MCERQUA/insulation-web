@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { MetalMenuBar } from '../components/ui/MetalMenuBar.tsx';
+---
+
+<BaseLayout title="Test Menu Spotlight">
+  <div style="
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+    min-height: 100vh;
+    background-image: url('/images/RANGE-360.jpg');
+    background-size: cover;
+    background-position: center;
+  ">
+    <MetalMenuBar client:load />
+    
+    <div style="height: 200px; display: flex; align-items: center; justify-content: center; margin-top: 150px;">
+      <h1 style="color: white; font-size: 2rem; text-align: center;">
+        Test page to verify menu spotlight effect
+      </h1>
+    </div>
+  </div>
+</BaseLayout>

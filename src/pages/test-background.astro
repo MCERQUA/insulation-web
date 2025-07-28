@@ -1,0 +1,35 @@
+---
+// Simple test page to verify background image works
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background Test</title>
+</head>
+<body style="
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('/images/attics/31-attic-cellulose-insulation-finished.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+">
+    <div style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    ">
+        <h1>Background Image Test</h1>
+        <p>If you can see this text on top of an attic image, the background is working.</p>
+        <p>Path: /images/attics/31-attic-cellulose-insulation-finished.JPG</p>
+    </div>
+</body>
+</html>

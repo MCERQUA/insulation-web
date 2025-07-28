@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import CoverageSection from '../components/sections/CoverageSection.astro';
+import ServicesSection from '../components/sections/ServicesSection.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+import { MetalMenuBar } from '../components/ui/MetalMenuBar.tsx';
+---
+
+<BaseLayout 
+  title="Home Performance Insulation - Professional Spray Foam & Air Sealing"
+  description="Expert spray foam insulation, air sealing, and home performance solutions for maximum energy efficiency and comfort. Professional installation and quality results."
+  keywords="spray foam insulation, air sealing, home insulation, energy efficiency, attic insulation, home performance"
+>
+  <MetalMenuBar client:load />
+  <HeroSection />
+  <CoverageSection />
+  <ServicesSection />
+  <ContactSection />
+</BaseLayout>

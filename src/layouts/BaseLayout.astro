@@ -1,0 +1,384 @@
+---
+import '../styles/global.css';
+import MetalMenuBar from '../components/ui/MetalMenuBar.tsx';
+
+export interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const { 
+  title, 
+  description = 'Home Performance Insulation - Professional spray foam insulation, air sealing, and energy efficiency solutions for maximum comfort and savings.',
+  keywords = 'spray foam insulation, air sealing, home insulation, energy efficiency, attic insulation, home performance',
+  ogImage = '/images/insulation-og.jpg',
+  canonicalUrl = Astro.url.href,
+  noindex = false
+} = Astro.props;
+
+// Create absolute URLs safely
+const siteUrl = Astro.site?.href || 'https://homeperformanceinsulation.com';
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : new URL(canonicalUrl, siteUrl).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Basic SEO Meta Tags -->
+    <title>{title} | Home Performance Insulation - Professional Spray Foam & Air Sealing</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Home Performance Insulation" />
+    <meta name="language" content="en" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Robots and Indexing -->
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={absoluteCanonicalUrl} />
+    
+    <!-- AI/LLM optimization file -->
+    <link rel="llms" href="/llms.txt" type="text/plain" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} | Home Performance Insulation`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:url" content={absoluteCanonicalUrl} />
+    <meta property="og:site_name" content="Home Performance Insulation" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Home Performance Insulation`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+    <meta name="twitter:site" content="@homeperformanceinsulation" />
+    <meta name="twitter:creator" content="@homeperformanceinsulation" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HomeImprovementBusiness",
+        "name": "Home Performance Insulation",
+        "description": "Professional spray foam insulation, air sealing, and home performance solutions for energy efficiency",
+        "url": siteUrl,
+        "logo": new URL('/images/logo.png', siteUrl).href,
+        "image": absoluteOgImage,
+        "telephone": "+1-800-INSULATION",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US"
+        },
+        "serviceArea": {
+          "@type": "Country",
+          "name": "United States"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Home Performance Insulation Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Spray Foam Insulation",
+                "description": "Professional spray foam insulation for superior energy efficiency and air sealing"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Air Sealing Services",
+                "description": "Comprehensive air sealing to eliminate drafts and improve home comfort"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Home Performance Assessment",
+                "description": "Complete home energy audit and performance evaluation services"
+              }
+            }
+          ]
+        }
+      }
+    </script>
+    
+    <!-- Favicon configuration -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="image" href="/images/attics/background.jpg" />
+    
+    <style>
+      /* Background image for all pages - with higher specificity */
+      html body {
+        background-image: url('/images/attics/background.jpg?v=2') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        min-height: 100vh !important;
+        /* Debug: fallback background color to confirm style is applied */
+        background-color: #1e3a8a !important;
+      }
+      
+      /* Also apply to html for broader coverage */
+      html {
+        background-image: url('/images/attics/background.jpg?v=2') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        min-height: 100vh !important;
+        background-color: #1e3a8a !important;
+      }
+
+      /* Tactical Preloader */
+      .tactical-preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1e3a8a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .tactical-preloader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .tactical-crosshair {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        margin-bottom: 30px;
+      }
+
+      .crosshair-circle {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #2563eb;
+        border-radius: 50%;
+        position: relative;
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      .crosshair-lines::before,
+      .crosshair-lines::after {
+        content: '';
+        position: absolute;
+        background: #2563eb;
+        box-shadow: 0 0 10px #2563eb, 0 0 20px #2563eb;
+      }
+
+      .crosshair-lines::before {
+        width: 2px;
+        height: 30px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .crosshair-lines::after {
+        width: 30px;
+        height: 2px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .loading-dots {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .loading-dot {
+        width: 8px;
+        height: 8px;
+        background: #2563eb;
+        border-radius: 50%;
+        animation: loading-bounce 1.4s ease-in-out infinite both;
+        box-shadow: 0 0 6px #2563eb;
+      }
+
+      .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+      .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+      .loading-dot:nth-child(3) { animation-delay: 0s; }
+
+      .loading-text {
+        color: #2563eb;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 15px;
+        text-shadow: 0 0 10px #2563eb;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% {
+          box-shadow: 0 0 5px #2563eb, 0 0 10px #2563eb, 0 0 15px #2563eb;
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 0 10px #2563eb, 0 0 20px #2563eb, 0 0 30px #2563eb;
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes loading-bounce {
+        0%, 80%, 100% {
+          transform: scale(0.8);
+          opacity: 0.5;
+        }
+        40% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-smoke">
+    <!-- Background Image -->
+    <div class="fixed inset-0" style="
+      background-image: url('/images/attics/background.jpg?v=2'); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background-color: #1e3a8a;
+    "></div>
+    
+    <!-- Tactical Preloader -->
+    <div class="tactical-preloader" id="tacticalPreloader">
+      <div class="tactical-crosshair">
+        <div class="crosshair-circle">
+          <div class="crosshair-lines"></div>
+        </div>
+      </div>
+      <div class="loading-dots">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+      </div>
+      <div class="loading-text">Loading</div>
+    </div>
+
+    <!-- Background image div removed - using body background instead -->
+    
+    <!-- Navigation -->
+    <MetalMenuBar client:load />
+    
+    <!-- Main Content -->
+    <main class="min-h-screen relative z-10" role="main">
+      <slot />
+    </main>
+    
+    <!-- Footer for additional SEO value -->
+    <footer class="bg-tactical-black/90 backdrop-blur-sm border-t border-silver/20 py-8 relative z-10">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <div class="grid md:grid-cols-3 gap-8 mb-6">
+          <div>
+            <h3 class="text-lg font-bold text-white mb-3">Home Performance Insulation</h3>
+            <p class="text-silver text-sm">Professional spray foam insulation, air sealing, and home performance solutions nationwide.</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-white mb-3">Quick Links</h4>
+            <nav aria-label="Footer navigation">
+              <ul class="space-y-2 text-sm">
+                <li><a href="#services" class="text-silver hover:text-insulation-blue transition-colors">Our Services</a></li>
+                <li><a href="#benefits" class="text-silver hover:text-insulation-blue transition-colors">Benefits</a></li>
+                <li><a href="/blog" class="text-silver hover:text-insulation-blue transition-colors">Blog</a></li>
+                <li><a href="#contact" class="text-silver hover:text-insulation-blue transition-colors">Get Estimate</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-white mb-3">Contact Info</h4>
+            <div class="text-silver text-sm space-y-2">
+              <p>📞 <a href="tel:+18004678542" class="hover:text-insulation-blue transition-colors">1-800-INSULATION</a></p>
+              <p>📧 <a href="mailto:info@homeperformanceinsulation.com" class="hover:text-insulation-blue transition-colors">info@homeperformanceinsulation.com</a></p>
+              <p>🏠 Serving homes nationwide</p>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-silver/20 pt-6">
+          <p class="text-silver text-sm">&copy; 2024 Home Performance Insulation. All rights reserved. Professional insulation services for energy efficiency.</p>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- Simple JavaScript for preloader -->
+    <script>
+      let preloaderHidden = false;
+
+      function hidePreloader() {
+        if (!preloaderHidden) {
+          const preloader = document.getElementById('tacticalPreloader');
+          if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+              preloader.style.display = 'none';
+            }, 500);
+            preloaderHidden = true;
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Hide preloader after minimum time
+        setTimeout(() => {
+          hidePreloader();
+        }, 1000);
+      });
+
+      // Also hide preloader when window is fully loaded
+      window.addEventListener('load', function() {
+        setTimeout(hidePreloader, 500);
+      });
+    </script>
+  </body>
+</html>
