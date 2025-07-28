@@ -201,9 +201,9 @@ const ScrollStorySystem: React.FC = () => {
               <CinematicText
                 text={currentStoryScene.title}
                 type={currentStoryScene.titleAnimation}
-                className="text-6xl md:text-8xl font-black text-white tracking-wider drop-shadow-2xl"
+                className="text-6xl md:text-8xl font-black text-white tracking-wider drop-shadow-2xl leading-tight"
                 duration={0.8}
-                splitBy="chars"
+                splitBy="words"
                 trigger={true}
               />
             </div>

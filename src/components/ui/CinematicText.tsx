@@ -201,11 +201,13 @@ const CinematicText: React.FC<CinematicTextProps> = ({
       animate={shouldAnimate ? "visible" : "hidden"}
       onAnimationComplete={onComplete}
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        perspective: '1000px'
+        perspective: '1000px',
+        textAlign: 'center',
+        width: '100%'
       }}
     >
       {type === 'typewriter' ? (
@@ -220,20 +222,38 @@ const CinematicText: React.FC<CinematicTextProps> = ({
           {text}
         </motion.span>
       ) : (
-        elements.map((element, index) => (
-          <motion.span
-            key={index}
-            variants={itemVariants}
-            className="inline-block"
-            style={{
-              transformOrigin: 'center',
-              transformStyle: 'preserve-3d'
-            }}
-          >
-            {element}
-            {splitBy === 'words' && index < elements.length - 1 && '\u00A0'}
-          </motion.span>
-        ))
+        splitBy === 'words' ? (
+          // For words, wrap each word to prevent breaking
+          elements.map((element, index) => (
+            <motion.span
+              key={index}
+              variants={itemVariants}
+              className="inline-block whitespace-nowrap"
+              style={{
+                transformOrigin: 'center',
+                transformStyle: 'preserve-3d',
+                marginRight: index < elements.length - 1 ? '0.5em' : '0'
+              }}
+            >
+              {element}
+            </motion.span>
+          ))
+        ) : (
+          // For characters, keep existing behavior
+          elements.map((element, index) => (
+            <motion.span
+              key={index}
+              variants={itemVariants}
+              className="inline-block"
+              style={{
+                transformOrigin: 'center',
+                transformStyle: 'preserve-3d'
+              }}
+            >
+              {element}
+            </motion.span>
+          ))
+        )
       )}
     </motion.div>
   );
