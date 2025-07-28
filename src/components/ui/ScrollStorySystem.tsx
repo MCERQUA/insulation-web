@@ -357,8 +357,8 @@ const ScrollStorySystem: React.FC = () => {
       
       setScrollProgress(progress);
       
-      // Calculate which scene should be active
-      const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
+      // Calculate which scene should be active with even distribution
+      const sceneIndex = Math.round(progress * (storyScenes.length - 1));
       const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
       
       if (clampedIndex !== currentScene) {
@@ -404,8 +404,8 @@ const ScrollStorySystem: React.FC = () => {
 
     // Initialize everything
     const initialize = () => {
-      // Set appropriate height for 31 scenes with smooth transitions
-      document.body.style.height = '1000vh';
+      // Set appropriate height for 31 scenes with consistent 3-click transitions
+      document.body.style.height = '1500vh';
       
       // Add touch-action for mobile support
       document.body.style.touchAction = 'pan-y';
@@ -457,7 +457,7 @@ const ScrollStorySystem: React.FC = () => {
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
             const currentScroll = window.scrollY;
             const progress = Math.min(currentScroll / scrollHeight, 1);
-            const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
+            const sceneIndex = Math.round(progress * (storyScenes.length - 1));
             const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
             
             snapToScene(clampedIndex);
