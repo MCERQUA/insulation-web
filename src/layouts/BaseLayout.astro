@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import MetalMenuBar from '../components/ui/MetalMenuBar.tsx';
+import FloatingPhoneButton from '../components/ui/FloatingPhoneButton.tsx';
 
 export interface Props {
   title: string;
@@ -328,6 +329,25 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
     <!-- Navigation -->
     <MetalMenuBar client:load />
     
+    <!-- Floating Phone Button -->
+    <FloatingPhoneButton client:load />
+    
+    <!-- Hidden Netlify Form for Detection -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="address" />
+      <select name="service">
+        <option value="attic-insulation">Attic Insulation</option>
+        <option value="spray-foam">Spray Foam Insulation</option>
+        <option value="air-sealing">Air Sealing</option>
+        <option value="home-performance">Home Performance Audit</option>
+        <option value="other">Other</option>
+      </select>
+      <textarea name="message"></textarea>
+    </form>
+
     <!-- Main Content -->
     <main class="min-h-screen relative z-10" role="main">
       <slot />

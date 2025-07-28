@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Home, Thermometer, Zap, FileText, Phone } from "lucide-react";
+import { Home, Building2, Building, Layers, FileText } from "lucide-react";
 import GlassSurface from "./GlassSurface";
 import LightRays from "./LightRays";
 import "./GlassSurface.css";
@@ -19,11 +19,11 @@ interface MetalMenuBarProps {
 }
 
 const defaultNavItems: NavItem[] = [
-  { name: 'Home', url: '/', icon: Home },
-  { name: 'Services', url: '#services', icon: Thermometer },
-  { name: 'Benefits', url: '#benefits', icon: Zap },
-  { name: 'Blog', url: '/blog', icon: FileText },
-  { name: 'Contact', url: '#contact', icon: Phone }
+  { name: 'Attics', url: '/', icon: Home },
+  { name: 'Homes', url: '#homes', icon: Building2 },
+  { name: 'Buildings', url: '#buildings', icon: Building },
+  { name: 'Other', url: '#other', icon: Layers },
+  { name: 'Blog', url: '/blog', icon: FileText }
 ];
 
 export function MetalMenuBar({ items = defaultNavItems, className }: MetalMenuBarProps) {
@@ -37,7 +37,7 @@ export function MetalMenuBar({ items = defaultNavItems, className }: MetalMenuBa
     let activeItem = items[0].name; // Default to first item
     
     if (currentPath === '/') {
-      activeItem = 'Home';
+      activeItem = 'Attics';
     } else if (currentPath.startsWith('/blog')) {
       activeItem = 'Blog';
     } else {
