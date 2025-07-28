@@ -11,19 +11,21 @@ import LightRays from '../ui/LightRays.tsx';
   background-attachment: fixed;
   background-color: #1e40af;
 ">
-  <!-- Light rays background effect -->
+  <!-- Main spotlight cone from top-center illuminating entire screen -->
   <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none; z-index: 1;">
     <LightRays 
       raysOrigin="top-center"
       raysColor="#fff8e1"
-      raysSpeed={1.5}
-      lightSpread={0.8}
-      rayLength={1.2}
-      followMouse={true}
-      mouseInfluence={0.1}
-      noiseAmount={0.1}
-      distortion={0.05}
-      className="hero-rays"
+      raysSpeed={1.2}
+      lightSpread={2.5}
+      rayLength={3.0}
+      followMouse={false}
+      mouseInfluence={0.0}
+      noiseAmount={0.05}
+      distortion={0.02}
+      fadeDistance={2.0}
+      saturation={1.2}
+      className="main-spotlight"
       client:load
     />
   </div>
