@@ -88,16 +88,16 @@ export function ContactModal({ onClose }: ContactModalProps) {
           className="h-full sm:h-auto sm:rounded-[20px] p-6 sm:p-6 flex flex-col"
         >
           {/* Header */}
-          <div className="flex items-start justify-between mb-6 flex-shrink-0">
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold text-white mb-2">Get Free Estimate</h2>
+          <div className="flex items-center justify-between mb-6 flex-shrink-0">
+            <div className="flex-1 min-w-0">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">Get Free Estimate</h2>
               <p className="text-white/80 text-sm">We'll get back to you within 24 hours</p>
             </div>
             <button
               onClick={onClose}
-              className="p-3 rounded-full hover:bg-white/10 transition-colors ml-4 flex-shrink-0"
+              className="p-2 rounded-full hover:bg-white/10 transition-colors ml-3 flex-shrink-0"
             >
-              <X size={24} className="text-white/80" />
+              <X size={20} className="text-white/80" />
             </button>
           </div>
 
