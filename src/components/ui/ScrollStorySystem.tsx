@@ -132,7 +132,7 @@ const ScrollStorySystem: React.FC = () => {
   const [currentScene, setCurrentScene] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [backgroundImage, setBackgroundImage] = useState(storyScenes[0].image);
+  const [backgroundImage, setBackgroundImage] = useState('/attics/background.jpg'); // Force start with background.jpg
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -161,9 +161,10 @@ const ScrollStorySystem: React.FC = () => {
       // Set initial tall height for scrolling
       document.body.style.height = '1000vh';
       
-      // Ensure we start at scene 0
+      // Ensure we start at scene 0 with the background.jpg
+      console.log('Initializing to scene 0 with image:', storyScenes[0].image);
       setCurrentScene(0);
-      setBackgroundImage(storyScenes[0].image);
+      setBackgroundImage('/attics/background.jpg'); // Force the correct path
       setScrollProgress(0);
       setIsInitialized(true);
       
@@ -179,6 +180,17 @@ const ScrollStorySystem: React.FC = () => {
       document.body.style.height = 'auto';
     };
   }, []); // Remove currentScene dependency to prevent loops
+
+  // Additional failsafe to ensure we start at scene 0
+  useEffect(() => {
+    if (!isInitialized) {
+      setTimeout(() => {
+        console.log('Failsafe: Forcing scene 0 with background.jpg');
+        setCurrentScene(0);
+        setBackgroundImage('/attics/background.jpg');
+      }, 100);
+    }
+  }, [isInitialized]);
 
   const currentStoryScene = storyScenes[currentScene];
 
