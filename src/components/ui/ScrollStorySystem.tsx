@@ -733,7 +733,7 @@ const ScrollStorySystem: React.FC = () => {
       
       {/* Scroll progress indicator */}
       <motion.div
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-30"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
