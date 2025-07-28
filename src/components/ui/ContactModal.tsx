@@ -76,62 +76,53 @@ export function ContactModal({ onClose }: ContactModalProps) {
           stiffness: 300
         }}
       >
-        <GlassSurface
-          width="100%"
-          height="100%"
-          borderRadius={0}
-          brightness={90}
-          opacity={0.95}
-          blur={25}
-          backgroundOpacity={0.2}
-          saturation={1.2}
-          className="h-full sm:h-auto sm:rounded-[20px] p-4 sm:p-6 flex flex-col"
-        >
-          {/* Header - Close button only */}
-          <div className="flex justify-start mb-4 flex-shrink-0">
-            <button
-              onClick={onClose}
-              className="p-2 rounded-full bg-green-500 hover:bg-green-600 transition-colors shadow-lg"
-            >
-              <X size={20} className="text-white" />
-            </button>
-          </div>
-
-          {isSubmitted ? (
-            /* Success Message */
-            <div className="flex-1 flex items-center justify-center">
-              <motion.div
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+        <div className="h-full sm:h-auto p-4 sm:p-6 flex flex-col">
+          {/* Form Container with Close Button */}
+          <div className="border border-white/30 rounded-lg p-4 bg-white/5 backdrop-blur-sm flex-1 flex flex-col">
+            {/* Close button at top of form */}
+            <div className="flex justify-end mb-4 flex-shrink-0">
+              <button
+                onClick={onClose}
+                className="p-2 rounded-full bg-green-500 hover:bg-green-600 transition-colors shadow-lg"
               >
-                <motion.div
-                  className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                  }}
-                >
-                  <Send size={28} className="text-green-400" />
-                </motion.div>
-                <h3 className="text-2xl font-semibold text-white mb-3">Message Sent!</h3>
-                <p className="text-white/80 text-lg">We'll contact you soon with your free estimate.</p>
-              </motion.div>
+                <X size={20} className="text-white" />
+              </button>
             </div>
-          ) : (
-            /* Contact Form */
-            <div className="flex-1 flex flex-col">
-              <div className="border border-white/30 rounded-lg p-4 mb-4 bg-white/5 backdrop-blur-sm">
+
+            {isSubmitted ? (
+              /* Success Message */
+              <div className="flex-1 flex items-center justify-center">
+                <motion.div
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <motion.div
+                    className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
+                  >
+                    <Send size={28} className="text-green-400" />
+                  </motion.div>
+                  <h3 className="text-2xl font-semibold text-white mb-3">Message Sent!</h3>
+                  <p className="text-white/80 text-lg">We'll contact you soon with your free estimate.</p>
+                </motion.div>
+              </div>
+            ) : (
+              /* Contact Form */
+              <div className="flex-1 flex flex-col">
                 <form
                   name="contact"
                   method="POST"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
-                  className="flex flex-col space-y-3"
+                  className="flex flex-col space-y-3 flex-1"
                 >
               {/* Netlify form detection */}
               <input type="hidden" name="form-name" value="contact" />
@@ -252,28 +243,28 @@ export function ContactModal({ onClose }: ContactModalProps) {
                 )}
               </motion.button>
                 </form>
-              </div>
-              
-              {/* Contact Info */}
-              <div className="mt-2 pt-4 border-t border-white/20 flex-shrink-0">
-                <div className="flex items-center justify-center gap-4 text-xs text-white/80">
-                  <div className="flex items-center gap-1">
-                    <Phone size={12} className="text-green-400" />
-                    <span>Call</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Mail size={12} className="text-green-400" />
-                    <span>24hr</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <MapPin size={12} className="text-green-400" />
-                    <span>Local</span>
+                
+                {/* Contact Info */}
+                <div className="mt-4 pt-4 border-t border-white/20 flex-shrink-0">
+                  <div className="flex items-center justify-center gap-4 text-xs text-white/80">
+                    <div className="flex items-center gap-1">
+                      <Phone size={12} className="text-green-400" />
+                      <span>Call</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Mail size={12} className="text-green-400" />
+                      <span>24hr</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <MapPin size={12} className="text-green-400" />
+                      <span>Local</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </GlassSurface>
+            )}
+          </div>
+        </div>
       </motion.div>
     </motion.div>
   );
