@@ -88,12 +88,12 @@ export function ContactModal({ onClose }: ContactModalProps) {
           className="h-full sm:h-auto sm:rounded-[20px] p-4 sm:p-6 flex flex-col"
         >
           {/* Header - Close button only */}
-          <div className="flex justify-end mb-2 flex-shrink-0">
+          <div className="flex justify-start mb-4 flex-shrink-0">
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full bg-green-500 hover:bg-green-600 transition-colors shadow-lg"
             >
-              <X size={20} className="text-white/80" />
+              <X size={20} className="text-white" />
             </button>
           </div>
 
@@ -124,14 +124,15 @@ export function ContactModal({ onClose }: ContactModalProps) {
           ) : (
             /* Contact Form */
             <div className="flex-1 flex flex-col">
-              <form
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                onSubmit={handleSubmit}
-                className="flex-1 flex flex-col space-y-3"
-              >
+              <div className="border border-white/30 rounded-lg p-4 mb-4 bg-white/5 backdrop-blur-sm">
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="flex flex-col space-y-3"
+                >
               {/* Netlify form detection */}
               <input type="hidden" name="form-name" value="contact" />
               <input type="hidden" name="bot-field" />
@@ -250,10 +251,11 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   </>
                 )}
               </motion.button>
-              </form>
+                </form>
+              </div>
               
               {/* Contact Info */}
-              <div className="mt-4 pt-4 border-t border-white/20 flex-shrink-0">
+              <div className="mt-2 pt-4 border-t border-white/20 flex-shrink-0">
                 <div className="flex items-center justify-center gap-4 text-xs text-white/80">
                   <div className="flex items-center gap-1">
                     <Phone size={12} className="text-green-400" />
