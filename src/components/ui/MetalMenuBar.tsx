@@ -67,19 +67,18 @@ export function MetalMenuBar({ items = defaultNavItems, className }: MetalMenuBa
   return (
     <div className={cn("fixed top-6 left-1/2 -translate-x-1/2 z-50", className)}>
       {/* Spotlight beam effect behind menu extending down full page */}
-      <div className="absolute inset-0 w-full h-screen -top-16 pointer-events-none z-0">
-        <LightRays 
+      <div style={{ width: '100%', height: '100vh', position: 'absolute', top: '-64px', left: 0, pointerEvents: 'none', zIndex: 0 }}>
+        <LightRays
           raysOrigin="top-center"
           raysColor="#ffffff"
-          raysSpeed={0.8}
-          lightSpread={1.5}
-          rayLength={2.5}
+          raysSpeed={1.5}
+          lightSpread={0.8}
+          rayLength={1.2}
           followMouse={false}
-          noiseAmount={0.08}
-          distortion={0.03}
-          fadeDistance={1.8}
-          saturation={0.9}
-          pulsating={false}
+          mouseInfluence={0.0}
+          noiseAmount={0.1}
+          distortion={0.05}
+          className="menu-spotlight"
         />
       </div>
       
