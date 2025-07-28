@@ -5,6 +5,7 @@ interface CinematicTextProps {
   text: string;
   type?: 'fade' | 'blur' | 'split' | 'focus' | 'slide' | 'bounce' | 'typewriter' | 'explosion';
   className?: string;
+  style?: React.CSSProperties;
   delay?: number;
   duration?: number;
   direction?: 'left' | 'right' | 'top' | 'bottom';
@@ -17,6 +18,7 @@ const CinematicText: React.FC<CinematicTextProps> = ({
   text,
   type = 'fade',
   className = '',
+  style = {},
   delay = 0,
   duration = 1,
   direction = 'bottom',
@@ -208,7 +210,8 @@ const CinematicText: React.FC<CinematicTextProps> = ({
         perspective: '1000px',
         textAlign: 'center',
         width: '100%',
-        gap: '0.25em'
+        gap: '0.25em',
+        ...style
       }}
     >
       {type === 'typewriter' ? (
