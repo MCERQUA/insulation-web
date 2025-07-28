@@ -145,10 +145,15 @@ const ScrollStorySystem: React.FC = () => {
       
       setScrollProgress(progress);
       
-      // Calculate which scene should be active
-      // When progress is 0, we want scene 0, when progress is 1, we want the last scene
-      const sceneIndex = Math.floor(progress * (storyScenes.length - 1));
-      const clampedIndex = Math.min(Math.max(sceneIndex, 0), storyScenes.length - 1);
+      // Calculate which scene should be active with more granular control
+      // Add some buffer zones between scenes for smoother transitions
+      const totalScenes = storyScenes.length;
+      const progressPerScene = 1 / (totalScenes - 1);
+      const currentSceneFloat = progress / progressPerScene;
+      
+      // Only change scene when we've scrolled significantly into the next section
+      const sceneIndex = Math.floor(currentSceneFloat + 0.3); // Add 0.3 buffer for smoother transitions
+      const clampedIndex = Math.min(Math.max(sceneIndex, 0), totalScenes - 1);
       
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
@@ -158,8 +163,11 @@ const ScrollStorySystem: React.FC = () => {
 
     // Initialize everything
     const initialize = () => {
-      // Set initial tall height for scrolling
-      document.body.style.height = '1000vh';
+      // Set much larger height for more granular scrolling - 10x more scroll distance
+      document.body.style.height = '10000vh';
+      
+      // Add smooth scrolling behavior
+      document.documentElement.style.scrollBehavior = 'auto'; // Keep instant for programmatic scrolls
       
       // Ensure we start at scene 0 with the background.jpg
       console.log('Initializing to scene 0 with image:', storyScenes[0].image);
