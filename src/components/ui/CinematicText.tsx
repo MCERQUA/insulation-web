@@ -188,13 +188,11 @@ const CinematicText: React.FC<CinematicTextProps> = ({
         return {
           hidden: { 
             opacity: 0,
-            scale: 0.8,
-            filter: 'brightness(0.3) blur(4px)'
+            scale: 0.8
           },
           visible: { 
             opacity: 1,
             scale: 1,
-            filter: 'brightness(1.2) blur(0px)',
             transition: { 
               duration: duration * 1.2,
               ease: "power2.out"
@@ -250,23 +248,21 @@ const CinematicText: React.FC<CinematicTextProps> = ({
             <motion.span
               key={index}
               variants={itemVariants}
-              className={`inline-block whitespace-nowrap ${type === 'lightInteraction' ? 'light-shimmer' : ''}`}
+              className={`inline-block whitespace-nowrap ${type === 'lightInteraction' ? 'light-interactive-text' : ''}`}
               style={{
                 transformOrigin: 'center',
                 transformStyle: 'preserve-3d',
                 ...(type === 'lightInteraction' && shouldAnimate ? {
+                  mixBlendMode: 'screen',
+                  color: '#ffffff',
                   textShadow: `
-                    0 0 10px rgba(255, 248, 225, 0.8),
-                    0 0 20px rgba(255, 248, 225, 0.6),
-                    0 0 30px rgba(255, 248, 225, 0.4),
-                    0 0 40px rgba(255, 248, 225, 0.2),
-                    2px 2px 4px rgba(0, 0, 0, 0.8)
+                    0 0 20px rgba(255, 248, 225, 0.9),
+                    0 0 40px rgba(255, 248, 225, 0.7),
+                    0 0 60px rgba(255, 248, 225, 0.5),
+                    0 0 80px rgba(255, 248, 225, 0.3),
+                    3px 3px 6px rgba(0, 0, 0, 1)
                   `,
-                  animation: 'lightShimmer 3s ease-in-out infinite',
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255, 248, 225, 0.1) 45%, rgba(255, 248, 225, 0.3) 50%, rgba(255, 248, 225, 0.1) 55%, transparent 100%)',
-                  backgroundSize: '200% 100%',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text'
+                  filter: 'contrast(1.2) brightness(1.1)'
                 } : {})
               }}
             >
@@ -279,23 +275,21 @@ const CinematicText: React.FC<CinematicTextProps> = ({
             <motion.span
               key={index}
               variants={itemVariants}
-              className={`inline-block ${type === 'lightInteraction' ? 'light-shimmer' : ''}`}
+              className={`inline-block ${type === 'lightInteraction' ? 'light-interactive-text' : ''}`}
               style={{
                 transformOrigin: 'center',
                 transformStyle: 'preserve-3d',
                 ...(type === 'lightInteraction' && shouldAnimate ? {
+                  mixBlendMode: 'screen',
+                  color: '#ffffff',
                   textShadow: `
-                    0 0 10px rgba(255, 248, 225, 0.8),
-                    0 0 20px rgba(255, 248, 225, 0.6),
-                    0 0 30px rgba(255, 248, 225, 0.4),
-                    0 0 40px rgba(255, 248, 225, 0.2),
-                    2px 2px 4px rgba(0, 0, 0, 0.8)
+                    0 0 20px rgba(255, 248, 225, 0.9),
+                    0 0 40px rgba(255, 248, 225, 0.7),
+                    0 0 60px rgba(255, 248, 225, 0.5),
+                    0 0 80px rgba(255, 248, 225, 0.3),
+                    3px 3px 6px rgba(0, 0, 0, 1)
                   `,
-                  animation: 'lightShimmer 3s ease-in-out infinite',
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255, 248, 225, 0.1) 45%, rgba(255, 248, 225, 0.3) 50%, rgba(255, 248, 225, 0.1) 55%, transparent 100%)',
-                  backgroundSize: '200% 100%',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text'
+                  filter: 'contrast(1.2) brightness(1.1)'
                 } : {})
               }}
             >
