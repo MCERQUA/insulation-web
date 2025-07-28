@@ -85,15 +85,15 @@ export function ContactModal({ onClose }: ContactModalProps) {
           blur={25}
           backgroundOpacity={0.2}
           saturation={1.2}
-          className="h-full sm:h-auto sm:rounded-[20px] p-6 sm:p-6 flex flex-col"
+          className="h-full sm:h-auto sm:rounded-[20px] p-4 sm:p-6 flex flex-col"
         >
           {/* Header - Close button only */}
-          <div className="flex justify-end mb-4 flex-shrink-0">
+          <div className="flex justify-end mb-2 flex-shrink-0">
             <button
               onClick={onClose}
               className="p-2 rounded-full hover:bg-white/10 transition-colors"
             >
-              <X size={24} className="text-white/80" />
+              <X size={20} className="text-white/80" />
             </button>
           </div>
 
@@ -130,7 +130,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
-                className="flex-1 flex flex-col space-y-4"
+                className="flex-1 flex flex-col space-y-3"
               >
               {/* Netlify form detection */}
               <input type="hidden" name="form-name" value="contact" />
@@ -138,7 +138,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
 
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="name" className="block text-sm font-medium text-white/90 mb-1">
                   Full Name *
                 </label>
                 <input
@@ -146,14 +146,14 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-3 py-2 text-sm bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="John Smith"
                 />
               </div>
 
               {/* Phone Field */}
               <div>
-                <label htmlFor="phone" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="phone" className="block text-sm font-medium text-white/90 mb-1">
                   Phone Number *
                 </label>
                 <input
@@ -161,42 +161,42 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   id="phone"
                   name="phone"
                   required
-                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-3 py-2 text-sm bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="(555) 123-4567"
                 />
               </div>
 
               {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="email" className="block text-sm font-medium text-white/90 mb-1">
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-3 py-2 text-sm bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="john@example.com"
                 />
               </div>
 
               {/* Address Field */}
               <div>
-                <label htmlFor="address" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="address" className="block text-sm font-medium text-white/90 mb-1">
                   Property Address
                 </label>
                 <input
                   type="text"
                   id="address"
                   name="address"
-                  className="w-full px-4 py-4 text-base bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
+                  className="w-full px-3 py-2 text-sm bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400/50 transition-all"
                   placeholder="123 Main St, City, State"
                 />
               </div>
 
               {/* Service Type */}
               <div>
-                <label htmlFor="service" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="service" className="block text-sm font-medium text-white/90 mb-1">
                   Service Needed
                 </label>
                 <select
@@ -214,7 +214,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
 
               {/* Message Field */}
               <div>
-                <label htmlFor="message" className="block text-base font-medium text-white/90 mb-3">
+                <label htmlFor="message" className="block text-sm font-medium text-white/90 mb-1">
                   Additional Details
                 </label>
                 <textarea
@@ -230,7 +230,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 text-white font-semibold py-4 px-6 text-lg rounded-xl transition-colors flex items-center justify-center gap-2 mt-6"
+                className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 text-white font-semibold py-3 px-4 text-base rounded-lg transition-colors flex items-center justify-center gap-2 mt-4"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -245,7 +245,7 @@ export function ContactModal({ onClose }: ContactModalProps) {
                   </>
                 ) : (
                   <>
-                    <Send size={20} />
+                    <Send size={16} />
                     Get Free Estimate
                   </>
                 )}
@@ -253,19 +253,19 @@ export function ContactModal({ onClose }: ContactModalProps) {
               </form>
               
               {/* Contact Info */}
-              <div className="mt-6 pt-6 border-t border-white/20 flex-shrink-0">
-                <div className="flex items-center justify-center gap-6 text-sm text-white/80">
-                  <div className="flex items-center gap-2">
-                    <Phone size={16} className="text-green-400" />
-                    <span>Call Now</span>
+              <div className="mt-4 pt-4 border-t border-white/20 flex-shrink-0">
+                <div className="flex items-center justify-center gap-4 text-xs text-white/80">
+                  <div className="flex items-center gap-1">
+                    <Phone size={12} className="text-green-400" />
+                    <span>Call</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail size={16} className="text-green-400" />
-                    <span>24hr Response</span>
+                  <div className="flex items-center gap-1">
+                    <Mail size={12} className="text-green-400" />
+                    <span>24hr</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin size={16} className="text-green-400" />
-                    <span>Local Experts</span>
+                  <div className="flex items-center gap-1">
+                    <MapPin size={12} className="text-green-400" />
+                    <span>Local</span>
                   </div>
                 </div>
               </div>
