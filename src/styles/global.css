@@ -90,7 +90,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Hero section background */
 .hero-background {
-  background-image: url('/images/attics/background.jpg');
+  background-image: url('/attics/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
