@@ -125,6 +125,206 @@ const storyScenes: StoryScene[] = [
     textAnimation: 'bounce',
     titleAnimation: 'split',
     background: 'from-emerald-900/30 to-teal-900/30'
+  },
+  {
+    id: 11,
+    title: "TOP PLATE BEFORE",
+    subtitle: "Energy Hemorrhage Zone",
+    description: "Inside the attic, the top plate shows clear signs of air leakage and thermal bridging...",
+    image: "/images/attics/11-Attic-inside-top-plate-Before.jpg",
+    textAnimation: 'fade',
+    titleAnimation: 'slide',
+    background: 'from-orange-900/30 to-red-900/30'
+  },
+  {
+    id: 12,
+    title: "TOP PLATE AFTER",
+    subtitle: "Sealed Perfection",
+    description: "After professional spray foam application, the top plate is completely air sealed...",
+    image: "/images/attics/12-Attic-inside-top-plate-after.jpg",
+    textAnimation: 'focus',
+    titleAnimation: 'bounce',
+    background: 'from-green-900/30 to-teal-900/30'
+  },
+  {
+    id: 13,
+    title: "COMPREHENSIVE SEALING",
+    subtitle: "Total Air Barrier",
+    description: "Multiple angles show the complete transformation of thermal performance...",
+    image: "/images/attics/13-Attic-inside-top-plate-after-2.jpg",
+    textAnimation: 'explosion',
+    titleAnimation: 'focus',
+    background: 'from-blue-900/30 to-indigo-900/30'
+  },
+  {
+    id: 14,
+    title: "BALLOON FRAME NIGHTMARE",
+    subtitle: "Open Top Plate Crisis",
+    description: "Old balloon frame construction creates massive air leakage pathways...",
+    image: "/images/attics/14-open-top-plate-old-balloon-frame-before.JPG",
+    textAnimation: 'slide',
+    titleAnimation: 'explosion',
+    background: 'from-red-900/30 to-orange-900/30'
+  },
+  {
+    id: 15,
+    title: "BALLOON FRAME SOLUTION",
+    subtitle: "Spray Foam Victory",
+    description: "Professional spray foam completely seals even the most challenging balloon frame openings...",
+    image: "/images/attics/15-open-top-plate-old-balloon-frame-after-spray-foam.JPG",
+    textAnimation: 'typewriter',
+    titleAnimation: 'fade',
+    background: 'from-green-900/30 to-emerald-900/30'
+  },
+  {
+    id: 16,
+    title: "AIR LOSS EVIDENCE",
+    subtitle: "Before Air Sealing",
+    description: "Visible signs of air movement and thermal bridging throughout the attic space...",
+    image: "/images/attics/16-attic-air-loss-before-airsealing-sprayfoam.JPG",
+    textAnimation: 'blur',
+    titleAnimation: 'split',
+    background: 'from-yellow-900/30 to-red-900/30'
+  },
+  {
+    id: 17,
+    title: "LARGE VOID DISCOVERY",
+    subtitle: "Hidden Energy Drain",
+    description: "Large voids in the building envelope create massive energy loss pathways...",
+    image: "/images/attics/18-attic-air-sealing-large-void-before-foam.JPG",
+    textAnimation: 'focus',
+    titleAnimation: 'slide',
+    background: 'from-purple-900/30 to-pink-900/30'
+  },
+  {
+    id: 18,
+    title: "DROP CEILING SOLUTION",
+    subtitle: "Spray Foam Transformation",
+    description: "Drop ceiling areas receive comprehensive spray foam treatment for complete air sealing...",
+    image: "/images/attics/19-attic-drop-ceiling-spray-foam-after.JPG",
+    textAnimation: 'bounce',
+    titleAnimation: 'explosion',
+    background: 'from-teal-900/30 to-cyan-900/30'
+  },
+  {
+    id: 19,
+    title: "DUCTWORK DISASTER",
+    subtitle: "Before Treatment",
+    description: "Uninsulated ductwork in unconditioned space wastes massive amounts of energy...",
+    image: "/images/attics/20-attic-ductwork-before-spray-foam.JPG",
+    textAnimation: 'slide',
+    titleAnimation: 'focus',
+    background: 'from-orange-900/30 to-red-900/30'
+  },
+  {
+    id: 20,
+    title: "LOOSE LEAKY DUCTS",
+    subtitle: "Energy Hemorrhage",
+    description: "Loose and leaky ductwork connections waste conditioned air directly into the attic...",
+    image: "/images/attics/21-attic-ductwork-before-spray-foam-loose-leaky.JPG",
+    textAnimation: 'typewriter',
+    titleAnimation: 'bounce',
+    background: 'from-red-900/30 to-rose-900/30'
+  },
+  {
+    id: 21,
+    title: "SPLIT OPEN DUCTS",
+    subtitle: "Critical Failure",
+    description: "Split ductwork dumps expensive conditioned air directly into the unconditioned attic...",
+    image: "/images/attics/22-attic-ductwork-split-open-leaking-into-attic.JPG",
+    textAnimation: 'explosion',
+    titleAnimation: 'slide',
+    background: 'from-yellow-900/30 to-orange-900/30'
+  },
+  {
+    id: 22,
+    title: "DUCTWORK TRANSFORMATION",
+    subtitle: "After Spray Foam",
+    description: "Professional spray foam encapsulation protects and insulates all ductwork...",
+    image: "/images/attics/23-attic-ductwork-after-spray-foam.JPG",
+    textAnimation: 'focus',
+    titleAnimation: 'fade',
+    background: 'from-green-900/30 to-teal-900/30'
+  },
+  {
+    id: 23,
+    title: "CRUSHED DUCTS",
+    subtitle: "Airflow Restriction",
+    description: "Crushed ductwork restricts airflow and reduces HVAC system efficiency...",
+    image: "/images/attics/24-attic-ductwork-crushed.JPG",
+    textAnimation: 'blur',
+    titleAnimation: 'explosion',
+    background: 'from-purple-900/30 to-indigo-900/30'
+  },
+  {
+    id: 24,
+    title: "PROFESSIONAL ENCAPSULATION",
+    subtitle: "Ductwork Protection",
+    description: "Spray foam encapsulation provides thermal protection and structural support for ductwork...",
+    image: "/images/attics/25-attic-spray-foam-ductwork-after.JPG",
+    textAnimation: 'slide',
+    titleAnimation: 'focus',
+    background: 'from-emerald-900/30 to-green-900/30'
+  },
+  {
+    id: 25,
+    title: "SKYLIGHT SEALING",
+    subtitle: "Light Well Treatment",
+    description: "Skylights receive specialized spray foam treatment to eliminate thermal bridging...",
+    image: "/images/attics/27-attic-spray-foam-skylight-after.JPG",
+    textAnimation: 'typewriter',
+    titleAnimation: 'split',
+    background: 'from-cyan-900/30 to-blue-900/30'
+  },
+  {
+    id: 26,
+    title: "COMPLETE AIR BARRIER",
+    subtitle: "Thermal Envelope Perfection",
+    description: "Professional spray foam creates a continuous air barrier throughout the entire attic space...",
+    image: "/images/attics/28-attic-spray-foam-airseal-air-barrier.JPG",
+    textAnimation: 'bounce',
+    titleAnimation: 'explosion',
+    background: 'from-lime-900/30 to-emerald-900/30'
+  },
+  {
+    id: 27,
+    title: "ANIMAL DAMAGE",
+    subtitle: "Insulation Disturbed",
+    description: "Animals can disturb and contaminate traditional insulation, reducing its effectiveness...",
+    image: "/images/attics/29-attic-insulation-distrubed-animals.JPG",
+    textAnimation: 'fade',
+    titleAnimation: 'slide',
+    background: 'from-brown-900/30 to-orange-900/30'
+  },
+  {
+    id: 28,
+    title: "COMPLETE REMOVAL",
+    subtitle: "Animals Destroy Insulation",
+    description: "Severe animal damage requires complete insulation removal and replacement...",
+    image: "/images/attics/30-attic-insulation-removed-by-animals.JPG",
+    textAnimation: 'focus',
+    titleAnimation: 'bounce',
+    background: 'from-gray-900/30 to-slate-900/30'
+  },
+  {
+    id: 29,
+    title: "CELLULOSE RESTORATION",
+    subtitle: "Traditional Insulation",
+    description: "When appropriate, cellulose insulation provides effective thermal performance...",
+    image: "/images/attics/31-attic-cellulose-insulation-finished.JPG",
+    textAnimation: 'explosion',
+    titleAnimation: 'fade',
+    background: 'from-amber-900/30 to-yellow-900/30'
+  },
+  {
+    id: 30,
+    title: "YOUR TRANSFORMATION",
+    subtitle: "Ready to Begin?",
+    description: "Contact us today for your free attic assessment and discover how much you could save...",
+    image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
+    textAnimation: 'focus',
+    titleAnimation: 'explosion',
+    background: 'from-green-900/20 to-emerald-900/20'
   }
 ];
 
@@ -158,8 +358,8 @@ const ScrollStorySystem: React.FC = () => {
 
     // Initialize everything
     const initialize = () => {
-      // Set shorter height for quicker scene transitions
-      document.body.style.height = '800vh';
+      // Set appropriate height for 31 scenes with smooth transitions
+      document.body.style.height = '1000vh';
       
       // Add touch-action for mobile support
       document.body.style.touchAction = 'pan-y';
