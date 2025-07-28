@@ -1,0 +1,148 @@
+---
+// Simple CSS-based light effect component
+---
+
+<div class="light-effect">
+  <!-- Main spotlight beam -->
+  <div class="spotlight-beam"></div>
+  
+  <!-- Additional light rays -->
+  <div class="light-ray ray-1"></div>
+  <div class="light-ray ray-2"></div>
+  <div class="light-ray ray-3"></div>
+  <div class="light-ray ray-4"></div>
+  <div class="light-ray ray-5"></div>
+</div>
+
+<style>
+.light-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.spotlight-beam {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  width: 300px;
+  height: 150vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 248, 225, 0.8) 0%,
+    rgba(255, 248, 225, 0.4) 20%,
+    rgba(255, 248, 225, 0.2) 40%,
+    rgba(255, 248, 225, 0.1) 60%,
+    rgba(255, 248, 225, 0.05) 80%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  border-radius: 50% 50% 0 0;
+  filter: blur(2px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.light-ray {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 2px;
+  height: 120vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 248, 225, 0.9) 0%,
+    rgba(255, 248, 225, 0.3) 30%,
+    rgba(255, 248, 225, 0.1) 60%,
+    transparent 100%
+  );
+  transform-origin: top center;
+  filter: blur(1px);
+}
+
+.ray-1 {
+  transform: translateX(-50%) rotate(-15deg);
+  animation: flicker 3s ease-in-out infinite;
+}
+
+.ray-2 {
+  transform: translateX(-50%) rotate(-7deg);
+  animation: flicker 3.5s ease-in-out infinite 0.5s;
+}
+
+.ray-3 {
+  transform: translateX(-50%) rotate(0deg);
+  animation: flicker 4s ease-in-out infinite 1s;
+  width: 3px;
+}
+
+.ray-4 {
+  transform: translateX(-50%) rotate(7deg);
+  animation: flicker 3.2s ease-in-out infinite 1.5s;
+}
+
+.ray-5 {
+  transform: translateX(-50%) rotate(15deg);
+  animation: flicker 3.8s ease-in-out infinite 2s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.9;
+  }
+}
+
+/* Menu spotlight effect */
+.menu-spotlight {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.05) 60%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  filter: blur(3px);
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+</style>
