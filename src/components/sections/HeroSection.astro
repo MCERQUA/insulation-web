@@ -1,6 +1,6 @@
 ---
 import { motion } from 'framer-motion';
-import SimpleLightEffect from '../ui/SimpleLightEffect.astro';
+import LightRays from '../ui/LightRays.tsx';
 ---
 
 <section class="hero-section relative min-h-screen flex items-center justify-center px-4 py-20 overflow-hidden" style="
@@ -12,7 +12,21 @@ import SimpleLightEffect from '../ui/SimpleLightEffect.astro';
   background-color: #1e40af;
 ">
   <!-- Light rays background effect -->
-  <SimpleLightEffect />
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+    <LightRays 
+      raysOrigin="top-center"
+      raysColor="#fff8e1"
+      raysSpeed={1.5}
+      lightSpread={0.8}
+      rayLength={1.2}
+      followMouse={false}
+      noiseAmount={0.1}
+      distortion={0.05}
+      fadeDistance={1.0}
+      saturation={1.0}
+      client:load
+    />
+  </div>
   <div class="max-w-6xl mx-auto text-center">
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Renderer, Program, Triangle, Mesh } from "ogl";
+import "./LightRays.css";
 
 const DEFAULT_COLOR = "#ffffff";
 
@@ -15,7 +16,7 @@ const hexToRgb = (hex: string): [number, number, number] => {
 };
 
 const getAnchorAndDir = (origin: string, w: number, h: number) => {
-  const outside = 0.6; // Increased to start much further off-screen
+  const outside = 0.2;
   switch (origin) {
     case "top-left":
       return { anchor: [0, -outside * h], dir: [0, 1] };
@@ -205,26 +206,17 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
                rayStrength(rayPos, finalRayDir, coord, 22.3991, 18.0234,
                            1.1 * raysSpeed);
 
-  fragColor = rays1 * 0.25 + rays2 * 0.2;
+  fragColor = rays1 * 0.5 + rays2 * 0.4;
 
   if (noiseAmount > 0.0) {
     float n = noise(coord * 0.01 + iTime * 0.1);
     fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
   }
 
-  // Create spotlight effect - stronger in center, weaker at edges
-  vec2 center = iResolution.xy * 0.5;
-  float distFromCenter = length(coord - center) / (iResolution.x * 0.5);
-  float spotlight = 1.0 - smoothstep(0.0, 1.0, distFromCenter);
-  spotlight = spotlight * spotlight; // Make it more focused
-  
   float brightness = 1.0 - (coord.y / iResolution.y);
-  fragColor.x *= 0.15 + brightness * 0.4;
-  fragColor.y *= 0.2 + brightness * 0.35;
-  fragColor.z *= 0.1 + brightness * 0.25;
-  
-  // Apply spotlight and middle intensity
-  fragColor.rgb *= spotlight * 0.6;
+  fragColor.x *= 0.1 + brightness * 0.8;
+  fragColor.y *= 0.3 + brightness * 0.6;
+  fragColor.z *= 0.5 + brightness * 0.5;
 
   if (saturation != 1.0) {
     float gray = dot(fragColor.rgb, vec3(0.299, 0.587, 0.114));
@@ -436,16 +428,6 @@ void main() {
     <div
       ref={containerRef}
       className={`light-rays-container ${className}`.trim()}
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        zIndex: 1,
-        overflow: 'hidden',
-        top: 0,
-        left: 0,
-      }}
     />
   );
 };
