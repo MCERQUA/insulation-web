@@ -162,117 +162,137 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
         background-color: #1e3a8a !important;
       }
 
-      /* Tactical Preloader */
-      .tactical-preloader {
+      /* Elegant Black Preloader */
+      .elegant-preloader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #1e3a8a;
+        background: #000000;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 9999;
         opacity: 1;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 0.8s ease-out;
       }
 
-      .tactical-preloader.fade-out {
+      .elegant-preloader.fade-out {
         opacity: 0;
         pointer-events: none;
       }
 
-      .tactical-crosshair {
-        width: 80px;
-        height: 80px;
+      .elegant-loader {
+        width: 100px;
+        height: 100px;
         position: relative;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
       }
 
-      .crosshair-circle {
+      .loader-ring {
+        position: absolute;
         width: 100%;
         height: 100%;
-        border: 2px solid #2563eb;
+        border: 3px solid transparent;
+        border-top: 3px solid #ffffff;
         border-radius: 50%;
-        position: relative;
-        animation: pulse-glow 2s ease-in-out infinite;
+        animation: elegant-spin 2s linear infinite;
+        box-shadow: 
+          0 0 20px rgba(255, 255, 255, 0.5),
+          0 0 40px rgba(255, 255, 255, 0.3),
+          0 0 60px rgba(255, 255, 255, 0.2),
+          inset 0 0 20px rgba(255, 255, 255, 0.1);
       }
 
-      .crosshair-lines::before,
-      .crosshair-lines::after {
-        content: '';
+      .loader-ring:nth-child(2) {
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+        border-top: 2px solid rgba(255, 255, 255, 0.8);
+        animation: elegant-spin 1.5s linear infinite reverse;
+        animation-delay: -0.5s;
+      }
+
+      .loader-ring:nth-child(3) {
+        width: 60%;
+        height: 60%;
+        top: 20%;
+        left: 20%;
+        border-top: 2px solid rgba(255, 255, 255, 0.6);
+        animation: elegant-spin 1s linear infinite;
+        animation-delay: -1s;
+      }
+
+      .loader-center {
         position: absolute;
-        background: #2563eb;
-        box-shadow: 0 0 10px #2563eb, 0 0 20px #2563eb;
-      }
-
-      .crosshair-lines::before {
-        width: 2px;
-        height: 30px;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .crosshair-lines::after {
-        width: 30px;
-        height: 2px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .loading-dots {
-        display: flex;
-        gap: 8px;
-        margin-top: 20px;
-      }
-
-      .loading-dot {
-        width: 8px;
-        height: 8px;
-        background: #2563eb;
+        width: 20px;
+        height: 20px;
+        background: #ffffff;
         border-radius: 50%;
-        animation: loading-bounce 1.4s ease-in-out infinite both;
-        box-shadow: 0 0 6px #2563eb;
+        transform: translate(-50%, -50%);
+        box-shadow: 
+          0 0 10px rgba(255, 255, 255, 0.8),
+          0 0 20px rgba(255, 255, 255, 0.6),
+          0 0 30px rgba(255, 255, 255, 0.4);
+        animation: elegant-pulse 2s ease-in-out infinite;
       }
-
-      .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-      .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-      .loading-dot:nth-child(3) { animation-delay: 0s; }
 
       .loading-text {
-        color: #2563eb;
-        font-family: 'Courier New', monospace;
-        font-size: 14px;
-        font-weight: bold;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-top: 15px;
-        text-shadow: 0 0 10px #2563eb;
+        letter-spacing: 4px;
+        text-shadow: 
+          0 0 10px rgba(255, 255, 255, 0.5),
+          0 0 20px rgba(255, 255, 255, 0.3);
+        animation: elegant-fade 2s ease-in-out infinite alternate;
       }
 
-      @keyframes pulse-glow {
+      @keyframes elegant-spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes elegant-pulse {
         0%, 100% {
-          box-shadow: 0 0 5px #2563eb, 0 0 10px #2563eb, 0 0 15px #2563eb;
-          transform: scale(1);
+          transform: translate(-50%, -50%) scale(1);
+          box-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.6),
+            0 0 30px rgba(255, 255, 255, 0.4);
         }
         50% {
-          box-shadow: 0 0 10px #2563eb, 0 0 20px #2563eb, 0 0 30px #2563eb;
-          transform: scale(1.05);
+          transform: translate(-50%, -50%) scale(1.2);
+          box-shadow: 
+            0 0 15px rgba(255, 255, 255, 1),
+            0 0 30px rgba(255, 255, 255, 0.8),
+            0 0 45px rgba(255, 255, 255, 0.6);
         }
       }
 
-      @keyframes loading-bounce {
-        0%, 80%, 100% {
-          transform: scale(0.8);
-          opacity: 0.5;
+      @keyframes elegant-fade {
+        0% {
+          opacity: 0.7;
+          text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.5),
+            0 0 20px rgba(255, 255, 255, 0.3);
         }
-        40% {
-          transform: scale(1.2);
+        100% {
           opacity: 1;
+          text-shadow: 
+            0 0 15px rgba(255, 255, 255, 0.8),
+            0 0 30px rgba(255, 255, 255, 0.5);
         }
       }
     </style>
@@ -292,17 +312,13 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
       background-color: #1e3a8a;
     "></div>
     
-    <!-- Tactical Preloader -->
-    <div class="tactical-preloader" id="tacticalPreloader">
-      <div class="tactical-crosshair">
-        <div class="crosshair-circle">
-          <div class="crosshair-lines"></div>
-        </div>
-      </div>
-      <div class="loading-dots">
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
+    <!-- Elegant Black Preloader -->
+    <div class="elegant-preloader" id="elegantPreloader">
+      <div class="elegant-loader">
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-center"></div>
       </div>
       <div class="loading-text">Loading</div>
     </div>
@@ -324,12 +340,12 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
 
       function hidePreloader() {
         if (!preloaderHidden) {
-          const preloader = document.getElementById('tacticalPreloader');
+          const preloader = document.getElementById('elegantPreloader');
           if (preloader) {
             preloader.classList.add('fade-out');
             setTimeout(() => {
               preloader.style.display = 'none';
-            }, 500);
+            }, 800);
             preloaderHidden = true;
           }
         }

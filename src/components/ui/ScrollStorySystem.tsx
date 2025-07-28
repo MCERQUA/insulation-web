@@ -158,8 +158,12 @@ const ScrollStorySystem: React.FC = () => {
 
     // Initialize everything
     const initialize = () => {
-      // Set much larger height for more granular scrolling - 10x more scroll distance
-      document.body.style.height = '10000vh';
+      // Set larger height for extended scrolling - 5x more scroll distance (more reasonable)
+      document.body.style.height = '5000vh';
+      
+      // Add touch-action for mobile support
+      document.body.style.touchAction = 'pan-y';
+      document.documentElement.style.touchAction = 'pan-y';
       
       // Add smooth scrolling behavior
       document.documentElement.style.scrollBehavior = 'auto'; // Keep instant for programmatic scrolls
@@ -178,9 +182,29 @@ const ScrollStorySystem: React.FC = () => {
     initialize();
     window.addEventListener('scroll', handleScroll);
     
+    // Add touch event support for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      // Allow normal scrolling behavior
+      touchEndY = e.touches[0].clientY;
+    };
+    
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
       document.body.style.height = 'auto';
+      document.body.style.touchAction = 'auto';
+      document.documentElement.style.touchAction = 'auto';
     };
   }, []); // Remove currentScene dependency to prevent loops
 
