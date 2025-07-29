@@ -496,6 +496,7 @@ const ScrollStorySystem: React.FC = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
+  const isProgrammaticScrollRef = useRef(false);
 
   // Autoplay functions
   const startAutoPlay = () => {
@@ -540,10 +541,16 @@ const ScrollStorySystem: React.FC = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const targetScroll = (nextScene / (storyScenes.length - 1)) * scrollHeight;
       
+      isProgrammaticScrollRef.current = true;
       window.scrollTo({
         top: targetScroll,
         behavior: 'smooth'
       });
+      
+      // Clear the flag after scroll completes
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false;
+      }, 1000);
       
       // Restart autoplay timer
       if (isAutoPlaying) {
@@ -566,10 +573,16 @@ const ScrollStorySystem: React.FC = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const targetScroll = (prevScene / (storyScenes.length - 1)) * scrollHeight;
       
+      isProgrammaticScrollRef.current = true;
       window.scrollTo({
         top: targetScroll,
         behavior: 'smooth'
       });
+      
+      // Clear the flag after scroll completes
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false;
+      }, 1000);
       
       // Handle user interaction
       handleUserInteraction();
@@ -594,9 +607,8 @@ const ScrollStorySystem: React.FC = () => {
       
       lastScrollTime = Date.now();
       
-      // Only handle user interaction if this is actual user scrolling, not programmatic
-      const now = Date.now();
-      if (now - lastScrollTime < 50) {
+      // Only handle user interaction if this is not a programmatic scroll
+      if (!isProgrammaticScrollRef.current) {
         handleUserInteraction();
       }
       
@@ -643,6 +655,7 @@ const ScrollStorySystem: React.FC = () => {
       // Temporarily disable user scrolling during snap
       setIsSnapping(true);
       
+      isProgrammaticScrollRef.current = true;
       window.scrollTo({
         top: targetScroll,
         behavior: 'smooth'
@@ -650,6 +663,7 @@ const ScrollStorySystem: React.FC = () => {
       
       setTimeout(() => {
         setIsSnapping(false);
+        isProgrammaticScrollRef.current = false;
       }, 800); // Longer timeout to ensure snap completes
     };
 
