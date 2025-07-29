@@ -32,7 +32,7 @@ const storyScenes: StoryScene[] = [
     id: 1,
     title: "HIDDEN IN PLAIN SIGHT",
     subtitle: "The Unseen Story",
-    description: "Your attic may look fine from the hatch below, but the real story is happening where you can't see. Even when your attic appears to have plenty of insulation, it's the hidden areas that matter most.",
+    description: "Your attic may look fine from the hatch, but the real story is happening where you can't see. Even when your attic appears to have plenty of insulation, it's the hidden areas that matter most.",
     image: "/images/attics/1-attic-insulation-low-slop-looks-deceiving.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
