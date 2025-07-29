@@ -29,7 +29,7 @@ const storyScenes: StoryScene[] = [
   {
     id: 0,
     title: "SHINING LIGHT",
-    subtitle: "On Your Attic Insulation",
+    subtitle: "On Your Attic<br/>Insulation",
     description: "Welcome to a journey that will reveal the hidden truth about what's happening above your head...",
     image: "/attics/background.jpg",
     textAnimation: 'explosion',
@@ -1025,22 +1025,44 @@ const ScrollStorySystem: React.FC = () => {
               {/* Subtitle */}
               {currentStoryScene.subtitle && (
                 <div className="mb-8">
-                  <CinematicText
-                    text={currentStoryScene.subtitle}
-                    type="fade"
-                    className="text-2xl md:text-3xl font-bold text-yellow-300 tracking-wide"
-                    style={{
-                      textShadow: `
-                        0 0 12px rgba(0, 0, 0, 0.9),
-                        0 0 24px rgba(0, 0, 0, 0.8),
-                        3px 3px 6px rgba(0, 0, 0, 1),
-                        4px 4px 8px rgba(0, 0, 0, 0.8)
-                      `
-                    }}
-                    duration={0.6}
-                    delay={0.3}
-                    trigger={true}
-                  />
+                  {/* Mobile version with line break */}
+                  <div className="block md:hidden">
+                    <CinematicText
+                      text={currentStoryScene.subtitle}
+                      type="fade"
+                      className="text-2xl md:text-3xl font-bold text-yellow-300 tracking-wide"
+                      style={{
+                        textShadow: `
+                          0 0 12px rgba(0, 0, 0, 0.9),
+                          0 0 24px rgba(0, 0, 0, 0.8),
+                          3px 3px 6px rgba(0, 0, 0, 1),
+                          4px 4px 8px rgba(0, 0, 0, 0.8)
+                        `
+                      }}
+                      duration={0.6}
+                      delay={0.3}
+                      trigger={true}
+                    />
+                  </div>
+                  {/* Desktop version without line break */}
+                  <div className="hidden md:block">
+                    <CinematicText
+                      text={currentStoryScene.subtitle.replace('<br/>', ' ')}
+                      type="fade"
+                      className="text-2xl md:text-3xl font-bold text-yellow-300 tracking-wide"
+                      style={{
+                        textShadow: `
+                          0 0 12px rgba(0, 0, 0, 0.9),
+                          0 0 24px rgba(0, 0, 0, 0.8),
+                          3px 3px 6px rgba(0, 0, 0, 1),
+                          4px 4px 8px rgba(0, 0, 0, 0.8)
+                        `
+                      }}
+                      duration={0.6}
+                      delay={0.3}
+                      trigger={true}
+                    />
+                  </div>
                 </div>
               )}
               
@@ -1160,22 +1182,44 @@ const ScrollStorySystem: React.FC = () => {
                 {/* Subtitle */}
                 {currentStoryScene.subtitle && (
                   <div>
-                    <CinematicText
-                      text={currentStoryScene.subtitle}
-                      type="fade"
-                      className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
-                      style={{
-                        textShadow: `
-                          0 0 8px rgba(0, 0, 0, 0.9),
-                          0 0 16px rgba(0, 0, 0, 0.8),
-                          2px 2px 4px rgba(0, 0, 0, 1),
-                          3px 3px 6px rgba(0, 0, 0, 0.8)
-                        `
-                      }}
-                      duration={0.6}
-                      delay={0.3}
-                      trigger={true}
-                    />
+                    {/* Mobile version with line break */}
+                    <div className="block md:hidden">
+                      <CinematicText
+                        text={currentStoryScene.subtitle}
+                        type="fade"
+                        className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
+                        style={{
+                          textShadow: `
+                            0 0 8px rgba(0, 0, 0, 0.9),
+                            0 0 16px rgba(0, 0, 0, 0.8),
+                            2px 2px 4px rgba(0, 0, 0, 1),
+                            3px 3px 6px rgba(0, 0, 0, 0.8)
+                          `
+                        }}
+                        duration={0.6}
+                        delay={0.3}
+                        trigger={true}
+                      />
+                    </div>
+                    {/* Desktop version without line break */}
+                    <div className="hidden md:block">
+                      <CinematicText
+                        text={currentStoryScene.subtitle.replace('<br/>', ' ')}
+                        type="fade"
+                        className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
+                        style={{
+                          textShadow: `
+                            0 0 8px rgba(0, 0, 0, 0.9),
+                            0 0 16px rgba(0, 0, 0, 0.8),
+                            2px 2px 4px rgba(0, 0, 0, 1),
+                            3px 3px 6px rgba(0, 0, 0, 0.8)
+                          `
+                        }}
+                        duration={0.6}
+                        delay={0.3}
+                        trigger={true}
+                      />
+                    </div>
                   </div>
                 )}
               </motion.div>
