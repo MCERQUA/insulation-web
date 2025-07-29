@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CinematicText from './CinematicText';
+import ColdClimateStamp from './ColdClimateStamp';
 
 interface StoryScene {
   id: number;
@@ -22,48 +23,48 @@ const storyScenes: StoryScene[] = [
     subtitle: "On Your Attic Insulation",
     description: "Welcome to a journey that will reveal the hidden truth about what's happening above your head...",
     image: "/attics/background.jpg",
-    textAnimation: 'focus',
-    titleAnimation: 'lightInteraction',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-blue-900/20 to-indigo-900/20'
   },
   {
     id: 1,
-    title: "THE DECEPTION",
-    subtitle: "What Lurks Above",
-    description: "Your attic may look fine from below, but the real story is happening where you can't see...",
+    title: "HIDDEN IN PLAIN SIGHT",
+    subtitle: "The Unseen Story",
+    description: "Your attic may look fine from the hatch below, but the real story is happening where you can't see. Even when your attic appears to have plenty of insulation, it's the hidden areas that matter most.",
     image: "/images/attics/1-attic-insulation-low-slop-looks-deceiving.JPG",
-    textAnimation: 'slide',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-red-900/30 to-orange-900/30'
   },
   {
     id: 2,
-    title: "THE OUTSIDE TRUTH",
+    title: "THE TRUTH ABOUT LOW SLOPES",
     subtitle: "Low Slope Reality",
-    description: "From the outside, everything appears normal. But thermal imaging reveals the shocking reality...",
+    description: "With the roof sheathing removed, we can see these hidden areas for the shocking reality. Low slope roofs create impossible-to-insulate spaces that most homeowners never know exist.",
     image: "/images/attics/2-Low-Slope-roof-outside-view.JPG",
-    textAnimation: 'blur',
-    titleAnimation: 'focus',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-blue-900/30 to-cyan-900/30'
   },
   {
     id: 3,
     title: "CLOSER INSPECTION",
     subtitle: "The Plot Thickens",
-    description: "A closer look reveals the extent of the thermal nightmare happening above your head...",
+    description: "Closer inspection reveals the devastating truth - bare spots with no insulation left completely empty where protection is needed most. Low slopes make it impossible to properly insulate these critical areas.",
     image: "/images/attics/3-Low-Slope-roof-outside-view-closeup.JPG",
-    textAnimation: 'bounce',
-    titleAnimation: 'split',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-purple-900/30 to-pink-900/30'
   },
   {
     id: 4,
     title: "THE EDGE OF DISASTER",
     subtitle: "Top Plate Catastrophe",
-    description: "Here's where your energy dollars are escaping - the top plate edge where heat hemorrhages freely...",
+    description: "Here's where your energy dollars are escaping - there's no protection or insulation where heat loss is most critical.",
     image: "/images/attics/4-Low-Slope-roof-outside-view-closeup-top-plate-edge.JPG",
-    textAnimation: 'typewriter',
-    titleAnimation: 'slide',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-yellow-900/30 to-red-900/30'
   },
   {
@@ -72,18 +73,18 @@ const storyScenes: StoryScene[] = [
     subtitle: "Evidence of Energy Loss",
     description: "Frost formation reveals exactly where your heated air is escaping into the cold attic space...",
     image: "/images/attics/5-attic-outside-top-plate-low-slope-frost-closeup.JPG",
-    textAnimation: 'focus',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-cyan-900/30 to-blue-900/30'
   },
   {
     id: 6,
-    title: "THE BIG PICTURE",
-    subtitle: "Full Scale Failure",
-    description: "Step back and see the complete thermal failure - this is what's costing you hundreds every month...",
+    title: "ICE DAMMING DAMAGE",
+    subtitle: "Cold Climate Consequences",
+    description: "Frost melting and refreezing creates ice dams, causing serious damage to your home's structure and interior...",
     image: "/images/attics/6-attic-outside-top-plate-low-slope-frost.JPG",
-    textAnimation: 'split',
-    titleAnimation: 'bounce',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-indigo-900/30 to-purple-900/30'
   },
   {
@@ -92,19 +93,9 @@ const storyScenes: StoryScene[] = [
     subtitle: "Health Hazard Alert",
     description: "Poor insulation leads to condensation, which leads to mold. Your family's health is at risk...",
     image: "/images/attics/7-ceiling-corner-mold-low-slope-no-insulation2.JPG",
-    textAnimation: 'blur',
+    textAnimation: 'fade',
     titleAnimation: 'fade',
     background: 'from-green-900/30 to-emerald-900/30'
-  },
-  {
-    id: 8,
-    title: "THE SPREADING THREAT",
-    subtitle: "Mold Invasion",
-    description: "What started as an energy problem becomes a health crisis. Mold spreads silently through your home...",
-    image: "/images/attics/8-ceiling-corner-mold-low-slope-no-insulation.JPG",
-    textAnimation: 'slide',
-    titleAnimation: 'typewriter',
-    background: 'from-red-900/30 to-rose-900/30'
   },
   {
     id: 9,
@@ -112,8 +103,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Spray Foam Victory",
     description: "Professional spray foam insulation creates an impermeable barrier, solving the problem permanently...",
     image: "/images/attics/9-attic-spray-foam-top-plates-low-slope.JPG",
-    textAnimation: 'explosion',
-    titleAnimation: 'focus',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-lime-900/30 to-green-900/30'
   },
   {
@@ -122,8 +113,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Energy Efficiency Achieved",
     description: "Proper spray foam and ventilation create the perfect attic environment - saving energy and preventing problems...",
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
-    textAnimation: 'bounce',
-    titleAnimation: 'split',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-emerald-900/30 to-teal-900/30'
   },
   {
@@ -133,7 +124,7 @@ const storyScenes: StoryScene[] = [
     description: "Inside the attic, the top plate shows clear signs of air leakage and thermal bridging...",
     image: "/images/attics/11-Attic-inside-top-plate-Before.jpg",
     textAnimation: 'fade',
-    titleAnimation: 'slide',
+    titleAnimation: 'fade',
     background: 'from-orange-900/30 to-red-900/30'
   },
   {
@@ -142,88 +133,78 @@ const storyScenes: StoryScene[] = [
     subtitle: "Sealed Perfection",
     description: "After professional spray foam application, the top plate is completely air sealed...",
     image: "/images/attics/12-Attic-inside-top-plate-after.jpg",
-    textAnimation: 'focus',
-    titleAnimation: 'bounce',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-green-900/30 to-teal-900/30'
   },
   {
     id: 13,
     title: "COMPREHENSIVE SEALING",
     subtitle: "Total Air Barrier",
-    description: "Multiple angles show the complete transformation of thermal performance...",
+    description: "Comprehensive air-sealing targets all the little gaps, cracks, and tiny leakage points that add up to massive energy loss.",
     image: "/images/attics/13-Attic-inside-top-plate-after-2.jpg",
-    textAnimation: 'explosion',
-    titleAnimation: 'focus',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-blue-900/30 to-indigo-900/30'
   },
   {
     id: 14,
     title: "BALLOON FRAME NIGHTMARE",
     subtitle: "Open Top Plate Crisis",
-    description: "Old balloon frame construction creates massive air leakage pathways...",
+    description: "Old balloon frame construction creates massive air leakage pathways - wide open down entire wall in older homes.",
     image: "/images/attics/14-open-top-plate-old-balloon-frame-before.JPG",
-    textAnimation: 'slide',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-red-900/30 to-orange-900/30'
   },
   {
     id: 15,
+    title: "AIR LOSS EVIDENCE",
+    subtitle: "Modern Construction Issues",
+    description: "Even modern construction has massive air leakages - it's not just cracks and gaps in new construction.",
+    image: "/images/attics/16-attic-air-loss-before-airsealing-sprayfoam.JPG",
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
+    background: 'from-yellow-900/30 to-red-900/30'
+  },
+  {
+    id: 16,
+    title: "MASSIVE VOIDS IN NEW CONSTRUCTION",
+    subtitle: "Hidden Energy Drain",
+    description: "Even modern construction can have massive air loss. This void shows that it's not just old homes - new construction can have devastating gaps too.",
+    image: "/images/attics/18-attic-air-sealing-large-void-before-foam.JPG",
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
+    background: 'from-purple-900/30 to-pink-900/30'
+  },
+  {
+    id: 17,
     title: "BALLOON FRAME SOLUTION",
     subtitle: "Spray Foam Victory",
-    description: "Professional spray foam completely seals even the most challenging balloon frame openings...",
+    description: "Professional spray foam completely seals even the most challenging balloon frame openings.",
     image: "/images/attics/15-open-top-plate-old-balloon-frame-after-spray-foam.JPG",
-    textAnimation: 'typewriter',
+    textAnimation: 'fade',
     titleAnimation: 'fade',
     background: 'from-green-900/30 to-emerald-900/30'
   },
   {
-    id: 16,
-    title: "AIR LOSS EVIDENCE",
-    subtitle: "Before Air Sealing",
-    description: "Visible signs of air movement and thermal bridging throughout the attic space...",
-    image: "/images/attics/16-attic-air-loss-before-airsealing-sprayfoam.JPG",
-    textAnimation: 'blur',
-    titleAnimation: 'split',
-    background: 'from-yellow-900/30 to-red-900/30'
-  },
-  {
-    id: 17,
-    title: "LARGE VOID DISCOVERY",
-    subtitle: "Hidden Energy Drain",
-    description: "Large voids in the building envelope create massive energy loss pathways...",
-    image: "/images/attics/18-attic-air-sealing-large-void-before-foam.JPG",
-    textAnimation: 'focus',
-    titleAnimation: 'slide',
-    background: 'from-purple-900/30 to-pink-900/30'
-  },
-  {
-    id: 18,
-    title: "DROP CEILING SOLUTION",
-    subtitle: "Spray Foam Transformation",
-    description: "Drop ceiling areas receive comprehensive spray foam treatment for complete air sealing...",
-    image: "/images/attics/19-attic-drop-ceiling-spray-foam-after.JPG",
-    textAnimation: 'bounce',
-    titleAnimation: 'explosion',
-    background: 'from-teal-900/30 to-cyan-900/30'
-  },
-  {
     id: 19,
-    title: "DUCTWORK DISASTER",
-    subtitle: "Before Treatment",
-    description: "Uninsulated ductwork in unconditioned space wastes massive amounts of energy...",
+    title: "OLD BRITTLE INSULATION FAILURE",
+    subtitle: "Non-Foam Insulations Don't Last",
+    description: "Non-foam insulations that don't last forever, causing huge heat loss issues.",
     image: "/images/attics/20-attic-ductwork-before-spray-foam.JPG",
-    textAnimation: 'slide',
-    titleAnimation: 'focus',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-orange-900/30 to-red-900/30'
   },
   {
     id: 20,
     title: "LOOSE LEAKY DUCTS",
     subtitle: "Energy Hemorrhage",
-    description: "Loose and leaky ductwork connections waste conditioned air directly into the attic...",
+    description: "Loose and leaky ductwork connections waste conditioned air directly into the attic.",
     image: "/images/attics/21-attic-ductwork-before-spray-foam-loose-leaky.JPG",
-    textAnimation: 'typewriter',
-    titleAnimation: 'bounce',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-red-900/30 to-rose-900/30'
   },
   {
@@ -232,8 +213,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Critical Failure",
     description: "Split ductwork dumps expensive conditioned air directly into the unconditioned attic...",
     image: "/images/attics/22-attic-ductwork-split-open-leaking-into-attic.JPG",
-    textAnimation: 'explosion',
-    titleAnimation: 'slide',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-yellow-900/30 to-orange-900/30'
   },
   {
@@ -242,7 +223,7 @@ const storyScenes: StoryScene[] = [
     subtitle: "After Spray Foam",
     description: "Professional spray foam encapsulation protects and insulates all ductwork...",
     image: "/images/attics/23-attic-ductwork-after-spray-foam.JPG",
-    textAnimation: 'focus',
+    textAnimation: 'fade',
     titleAnimation: 'fade',
     background: 'from-green-900/30 to-teal-900/30'
   },
@@ -252,8 +233,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Airflow Restriction",
     description: "Crushed ductwork restricts airflow and reduces HVAC system efficiency...",
     image: "/images/attics/24-attic-ductwork-crushed.JPG",
-    textAnimation: 'blur',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-purple-900/30 to-indigo-900/30'
   },
   {
@@ -262,8 +243,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Ductwork Protection",
     description: "Spray foam encapsulation provides thermal protection and structural support for ductwork...",
     image: "/images/attics/25-attic-spray-foam-ductwork-after.JPG",
-    textAnimation: 'slide',
-    titleAnimation: 'focus',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-emerald-900/30 to-green-900/30'
   },
   {
@@ -272,8 +253,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Light Well Treatment",
     description: "Skylights receive specialized spray foam treatment to eliminate thermal bridging...",
     image: "/images/attics/27-attic-spray-foam-skylight-after.JPG",
-    textAnimation: 'typewriter',
-    titleAnimation: 'split',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-cyan-900/30 to-blue-900/30'
   },
   {
@@ -282,8 +263,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Thermal Envelope Perfection",
     description: "Professional spray foam creates a continuous air barrier throughout the entire attic space...",
     image: "/images/attics/28-attic-spray-foam-airseal-air-barrier.JPG",
-    textAnimation: 'bounce',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-lime-900/30 to-emerald-900/30'
   },
   {
@@ -293,7 +274,7 @@ const storyScenes: StoryScene[] = [
     description: "Animals can disturb and contaminate traditional insulation, reducing its effectiveness...",
     image: "/images/attics/29-attic-insulation-distrubed-animals.JPG",
     textAnimation: 'fade',
-    titleAnimation: 'slide',
+    titleAnimation: 'fade',
     background: 'from-brown-900/30 to-orange-900/30'
   },
   {
@@ -302,17 +283,17 @@ const storyScenes: StoryScene[] = [
     subtitle: "Animals Destroy Insulation",
     description: "Severe animal damage requires complete insulation removal and replacement...",
     image: "/images/attics/30-attic-insulation-removed-by-animals.JPG",
-    textAnimation: 'focus',
-    titleAnimation: 'bounce',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-gray-900/30 to-slate-900/30'
   },
   {
     id: 29,
     title: "CELLULOSE RESTORATION",
     subtitle: "Traditional Insulation",
-    description: "When appropriate, cellulose insulation provides effective thermal performance...",
+    description: "When appropriate, cellulose insulation provides effective thermal performance. Fresh cellulose insulation also deters pests while providing superior thermal resistance for year-round comfort.",
     image: "/images/attics/31-attic-cellulose-insulation-finished.JPG",
-    textAnimation: 'explosion',
+    textAnimation: 'fade',
     titleAnimation: 'fade',
     background: 'from-amber-900/30 to-yellow-900/30'
   },
@@ -322,8 +303,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Ready to Begin?",
     description: "Contact us today for your free attic assessment and discover how much you could save...",
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
-    textAnimation: 'focus',
-    titleAnimation: 'explosion',
+    textAnimation: 'fade',
+    titleAnimation: 'fade',
     background: 'from-green-900/20 to-emerald-900/20'
   }
 ];
@@ -523,6 +504,13 @@ const ScrollStorySystem: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       />
+      
+      {/* Cold Climate Stamps for specific slides */}
+      {(currentScene === 5 || currentScene === 6) && (
+        <ColdClimateStamp 
+          className="top-8 right-8 md:top-12 md:right-12" 
+        />
+      )}
       
       {/* Story content container */}
       <div 
