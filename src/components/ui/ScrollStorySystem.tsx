@@ -4,7 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CinematicText from './CinematicText';
 import ColdClimateStamp from './ColdClimateStamp';
+import AnimatedHighlightText from './AnimatedHighlightText';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+interface HighlightConfig {
+  text: string;
+  color: 'red' | 'blue' | 'green' | 'yellow';
+  animation: 'bounce' | 'pulse' | 'wave' | 'glow' | 'shake';
+}
 
 interface StoryScene {
   id: number;
@@ -15,6 +22,7 @@ interface StoryScene {
   textAnimation: 'fade' | 'blur' | 'split' | 'focus' | 'slide' | 'bounce' | 'typewriter' | 'explosion';
   titleAnimation: 'fade' | 'blur' | 'split' | 'focus' | 'slide' | 'bounce' | 'typewriter' | 'explosion';
   background?: string;
+  highlights?: HighlightConfig[];
 }
 
 const storyScenes: StoryScene[] = [
@@ -36,7 +44,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/1-attic-insulation-low-slop-looks-deceiving.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-red-900/30 to-orange-900/30'
+    background: 'from-red-900/30 to-orange-900/30',
+    highlights: [
+      { text: "can't see", color: 'red', animation: 'pulse' },
+      { text: "hidden areas", color: 'blue', animation: 'glow' }
+    ]
   },
   {
     id: 2,
@@ -66,7 +78,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/4-Low-Slope-roof-outside-view-closeup-top-plate-edge.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-yellow-900/30 to-red-900/30'
+    background: 'from-yellow-900/30 to-red-900/30',
+    highlights: [
+      { text: "energy dollars", color: 'red', animation: 'shake' },
+      { text: "escaping", color: 'red', animation: 'bounce' },
+      { text: "most critical", color: 'blue', animation: 'pulse' }
+    ]
   },
   {
     id: 5,
@@ -76,7 +93,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/5-attic-outside-top-plate-low-slope-frost-closeup.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-cyan-900/30 to-blue-900/30'
+    background: 'from-cyan-900/30 to-blue-900/30',
+    highlights: [
+      { text: "reveals exactly", color: 'blue', animation: 'glow' },
+      { text: "escaping", color: 'red', animation: 'wave' }
+    ]
   },
   {
     id: 6,
@@ -96,7 +117,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/7-ceiling-corner-mold-low-slope-no-insulation2.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-green-900/30 to-emerald-900/30'
+    background: 'from-green-900/30 to-emerald-900/30',
+    highlights: [
+      { text: "mold", color: 'red', animation: 'pulse' },
+      { text: "health is at risk", color: 'red', animation: 'shake' }
+    ]
   },
   {
     id: 9,
@@ -106,7 +131,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/9-attic-spray-foam-top-plates-low-slope.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-lime-900/30 to-green-900/30'
+    background: 'from-lime-900/30 to-green-900/30',
+    highlights: [
+      { text: "impermeable barrier", color: 'blue', animation: 'glow' },
+      { text: "permanently", color: 'green', animation: 'bounce' }
+    ]
   },
   {
     id: 10,
@@ -196,7 +225,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/20-attic-ductwork-before-spray-foam.JPG",
     textAnimation: 'fade',
     titleAnimation: 'fade',
-    background: 'from-orange-900/30 to-red-900/30'
+    background: 'from-orange-900/30 to-red-900/30',
+    highlights: [
+      { text: "don't last forever", color: 'red', animation: 'wave' },
+      { text: "huge heat loss", color: 'red', animation: 'pulse' }
+    ]
   },
   {
     id: 20,
@@ -669,23 +702,42 @@ const ScrollStorySystem: React.FC = () => {
               
               {/* Description */}
               <div className="mb-8">
-                <CinematicText
-                  text={currentStoryScene.description}
-                  type={currentStoryScene.textAnimation}
-                  className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
-                  style={{
-                    textShadow: `
-                      0 0 10px rgba(0, 0, 0, 0.9),
-                      0 0 20px rgba(0, 0, 0, 0.8),
-                      2px 2px 4px rgba(0, 0, 0, 1),
-                      3px 3px 6px rgba(0, 0, 0, 0.8)
-                    `
-                  }}
-                  duration={1.2}
-                  delay={0.6}
-                  splitBy="words"
-                  trigger={true}
-                />
+                {currentStoryScene.highlights && currentStoryScene.highlights.length > 0 ? (
+                  <AnimatedHighlightText
+                    text={currentStoryScene.description}
+                    highlights={currentStoryScene.highlights}
+                    className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto text-center"
+                    style={{
+                      textShadow: `
+                        0 0 10px rgba(0, 0, 0, 0.9),
+                        0 0 20px rgba(0, 0, 0, 0.8),
+                        2px 2px 4px rgba(0, 0, 0, 1),
+                        3px 3px 6px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={1.2}
+                    delay={0.6}
+                    trigger={true}
+                  />
+                ) : (
+                  <CinematicText
+                    text={currentStoryScene.description}
+                    type={currentStoryScene.textAnimation}
+                    className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                    style={{
+                      textShadow: `
+                        0 0 10px rgba(0, 0, 0, 0.9),
+                        0 0 20px rgba(0, 0, 0, 0.8),
+                        2px 2px 4px rgba(0, 0, 0, 1),
+                        3px 3px 6px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={1.2}
+                    delay={0.6}
+                    splitBy="words"
+                    trigger={true}
+                  />
+                )}
               </div>
               
               {/* Navigation arrows for first scene only */}
@@ -806,23 +858,42 @@ const ScrollStorySystem: React.FC = () => {
               >
                 {/* Description */}
                 <div className="mb-8">
-                  <CinematicText
-                    text={currentStoryScene.description}
-                    type={currentStoryScene.textAnimation}
-                    className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
-                    style={{
-                      textShadow: `
-                        0 0 8px rgba(0, 0, 0, 0.9),
-                        0 0 16px rgba(0, 0, 0, 0.8),
-                        1px 1px 3px rgba(0, 0, 0, 1),
-                        2px 2px 6px rgba(0, 0, 0, 0.8)
-                      `
-                    }}
-                    duration={1.2}
-                    delay={0.6}
-                    splitBy="words"
-                    trigger={true}
-                  />
+                  {currentStoryScene.highlights && currentStoryScene.highlights.length > 0 ? (
+                    <AnimatedHighlightText
+                      text={currentStoryScene.description}
+                      highlights={currentStoryScene.highlights}
+                      className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto text-center"
+                      style={{
+                        textShadow: `
+                          0 0 8px rgba(0, 0, 0, 0.9),
+                          0 0 16px rgba(0, 0, 0, 0.8),
+                          1px 1px 3px rgba(0, 0, 0, 1),
+                          2px 2px 6px rgba(0, 0, 0, 0.8)
+                        `
+                      }}
+                      duration={1.2}
+                      delay={0.6}
+                      trigger={true}
+                    />
+                  ) : (
+                    <CinematicText
+                      text={currentStoryScene.description}
+                      type={currentStoryScene.textAnimation}
+                      className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                      style={{
+                        textShadow: `
+                          0 0 8px rgba(0, 0, 0, 0.9),
+                          0 0 16px rgba(0, 0, 0, 0.8),
+                          1px 1px 3px rgba(0, 0, 0, 1),
+                          2px 2px 6px rgba(0, 0, 0, 0.8)
+                        `
+                      }}
+                      duration={1.2}
+                      delay={0.6}
+                      splitBy="words"
+                      trigger={true}
+                    />
+                  )}
                 </div>
                 
                 {/* Scene indicator */}
