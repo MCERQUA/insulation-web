@@ -58,7 +58,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/2-Low-Slope-roof-outside-view.JPG",
     textAnimation: 'blur',
     titleAnimation: 'bounce',
-    background: 'from-blue-900/30 to-cyan-900/30'
+    background: 'from-blue-900/30 to-cyan-900/30',
+    highlights: [
+      { text: "shocking reality", color: 'red', animation: 'shake' },
+      { text: "impossible-to-insulate", color: 'red', animation: 'pulse' },
+      { text: "never know", color: 'blue', animation: 'wave' }
+    ]
   },
   {
     id: 3,
@@ -68,7 +73,13 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/3-Low-Slope-roof-outside-view-closeup.JPG",
     textAnimation: 'split',
     titleAnimation: 'focus',
-    background: 'from-purple-900/30 to-pink-900/30'
+    background: 'from-purple-900/30 to-pink-900/30',
+    highlights: [
+      { text: "devastating truth", color: 'red', animation: 'shake' },
+      { text: "bare spots", color: 'red', animation: 'pulse' },
+      { text: "completely empty", color: 'red', animation: 'bounce' },
+      { text: "critical areas", color: 'blue', animation: 'glow' }
+    ]
   },
   {
     id: 4,
@@ -107,7 +118,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/6-attic-outside-top-plate-low-slope-frost.JPG",
     textAnimation: 'explosion',
     titleAnimation: 'blur',
-    background: 'from-indigo-900/30 to-purple-900/30'
+    background: 'from-indigo-900/30 to-purple-900/30',
+    highlights: [
+      { text: "ice dams", color: 'red', animation: 'shake' },
+      { text: "serious damage", color: 'red', animation: 'pulse' },
+      { text: "structure and interior", color: 'blue', animation: 'wave' }
+    ]
   },
   {
     id: 7,
@@ -121,6 +137,21 @@ const storyScenes: StoryScene[] = [
     highlights: [
       { text: "mold", color: 'red', animation: 'pulse' },
       { text: "health is at risk", color: 'red', animation: 'shake' }
+    ]
+  },
+  {
+    id: 8,
+    title: "VENTILATION PROBLEMS",
+    subtitle: "Air Flow Issues",
+    description: "Poor ventilation compounds insulation problems, creating moisture buildup and reducing energy efficiency throughout your home...",
+    image: "/images/attics/8-attic-ventilation-problems.JPG",
+    textAnimation: 'focus',
+    titleAnimation: 'slide',
+    background: 'from-gray-900/30 to-blue-900/30',
+    highlights: [
+      { text: "compounds problems", color: 'red', animation: 'bounce' },
+      { text: "moisture buildup", color: 'red', animation: 'pulse' },
+      { text: "reducing energy efficiency", color: 'blue', animation: 'glow' }
     ]
   },
   {
@@ -145,7 +176,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
     textAnimation: 'split',
     titleAnimation: 'explosion',
-    background: 'from-emerald-900/30 to-teal-900/30'
+    background: 'from-emerald-900/30 to-teal-900/30',
+    highlights: [
+      { text: "perfect attic environment", color: 'green', animation: 'glow' },
+      { text: "saving energy", color: 'green', animation: 'bounce' },
+      { text: "preventing problems", color: 'blue', animation: 'pulse' }
+    ]
   },
   {
     id: 11,
@@ -155,7 +191,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/11-Attic-inside-top-plate-Before.jpg",
     textAnimation: 'blur',
     titleAnimation: 'focus',
-    background: 'from-orange-900/30 to-red-900/30'
+    background: 'from-orange-900/30 to-red-900/30',
+    highlights: [
+      { text: "clear signs", color: 'blue', animation: 'wave' },
+      { text: "air leakage", color: 'red', animation: 'shake' },
+      { text: "thermal bridging", color: 'red', animation: 'pulse' }
+    ]
   },
   {
     id: 12,
@@ -165,7 +206,11 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/12-Attic-inside-top-plate-after.jpg",
     textAnimation: 'typewriter',
     titleAnimation: 'slide',
-    background: 'from-green-900/30 to-teal-900/30'
+    background: 'from-green-900/30 to-teal-900/30',
+    highlights: [
+      { text: "professional", color: 'blue', animation: 'glow' },
+      { text: "completely air sealed", color: 'green', animation: 'bounce' }
+    ]
   },
   {
     id: 13,
@@ -175,7 +220,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/13-Attic-inside-top-plate-after-2.jpg",
     textAnimation: 'bounce',
     titleAnimation: 'blur',
-    background: 'from-blue-900/30 to-indigo-900/30'
+    background: 'from-blue-900/30 to-indigo-900/30',
+    highlights: [
+      { text: "targets all", color: 'blue', animation: 'glow' },
+      { text: "gaps, cracks", color: 'red', animation: 'wave' },
+      { text: "massive energy loss", color: 'red', animation: 'shake' }
+    ]
   },
   {
     id: 14,
@@ -185,7 +235,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/14-open-top-plate-old-balloon-frame-before.JPG",
     textAnimation: 'explosion',
     titleAnimation: 'typewriter',
-    background: 'from-red-900/30 to-orange-900/30'
+    background: 'from-red-900/30 to-orange-900/30',
+    highlights: [
+      { text: "massive air leakage", color: 'red', animation: 'shake' },
+      { text: "wide open", color: 'red', animation: 'pulse' },
+      { text: "entire wall", color: 'yellow', animation: 'bounce' }
+    ]
   },
   {
     id: 15,
@@ -195,7 +250,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/16-attic-air-loss-before-airsealing-sprayfoam.JPG",
     textAnimation: 'focus',
     titleAnimation: 'bounce',
-    background: 'from-yellow-900/30 to-red-900/30'
+    background: 'from-yellow-900/30 to-red-900/30',
+    highlights: [
+      { text: "Even modern construction", color: 'yellow', animation: 'glow' },
+      { text: "massive air leakages", color: 'red', animation: 'shake' },
+      { text: "new construction", color: 'blue', animation: 'wave' }
+    ]
   },
   {
     id: 16,
@@ -205,7 +265,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/18-attic-air-sealing-large-void-before-foam.JPG",
     textAnimation: 'split',
     titleAnimation: 'explosion',
-    background: 'from-purple-900/30 to-pink-900/30'
+    background: 'from-purple-900/30 to-pink-900/30',
+    highlights: [
+      { text: "massive air loss", color: 'red', animation: 'pulse' },
+      { text: "void shows", color: 'blue', animation: 'glow' },
+      { text: "devastating gaps", color: 'red', animation: 'shake' }
+    ]
   },
   {
     id: 17,
@@ -215,7 +280,27 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/15-open-top-plate-old-balloon-frame-after-spray-foam.JPG",
     textAnimation: 'slide',
     titleAnimation: 'focus',
-    background: 'from-green-900/30 to-emerald-900/30'
+    background: 'from-green-900/30 to-emerald-900/30',
+    highlights: [
+      { text: "Professional", color: 'blue', animation: 'glow' },
+      { text: "completely seals", color: 'green', animation: 'bounce' },
+      { text: "most challenging", color: 'yellow', animation: 'wave' }
+    ]
+  },
+  {
+    id: 18,
+    title: "WIDESPREAD INSULATION FAILURE",
+    subtitle: "System-Wide Problems",
+    description: "Traditional insulation systems fail across multiple areas, creating widespread energy loss and comfort issues throughout your home...",
+    image: "/images/attics/17-attic-insulation-failure-widespread.JPG",
+    textAnimation: 'blur',
+    titleAnimation: 'typewriter',
+    background: 'from-red-900/30 to-orange-900/30',
+    highlights: [
+      { text: "fail across multiple areas", color: 'red', animation: 'shake' },
+      { text: "widespread energy loss", color: 'red', animation: 'pulse' },
+      { text: "comfort issues", color: 'yellow', animation: 'wave' }
+    ]
   },
   {
     id: 19,
@@ -239,7 +324,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/21-attic-ductwork-before-spray-foam-loose-leaky.JPG",
     textAnimation: 'typewriter',
     titleAnimation: 'bounce',
-    background: 'from-red-900/30 to-rose-900/30'
+    background: 'from-red-900/30 to-rose-900/30',
+    highlights: [
+      { text: "Loose and leaky", color: 'red', animation: 'shake' },
+      { text: "waste conditioned air", color: 'red', animation: 'pulse' },
+      { text: "directly into the attic", color: 'yellow', animation: 'bounce' }
+    ]
   },
   {
     id: 21,
@@ -249,7 +339,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/22-attic-ductwork-split-open-leaking-into-attic.JPG",
     textAnimation: 'explosion',
     titleAnimation: 'focus',
-    background: 'from-yellow-900/30 to-orange-900/30'
+    background: 'from-yellow-900/30 to-orange-900/30',
+    highlights: [
+      { text: "Split ductwork", color: 'red', animation: 'shake' },
+      { text: "dumps expensive", color: 'red', animation: 'pulse' },
+      { text: "unconditioned attic", color: 'yellow', animation: 'wave' }
+    ]
   },
   {
     id: 22,
@@ -259,7 +354,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/23-attic-ductwork-after-spray-foam.JPG",
     textAnimation: 'bounce',
     titleAnimation: 'blur',
-    background: 'from-green-900/30 to-teal-900/30'
+    background: 'from-green-900/30 to-teal-900/30',
+    highlights: [
+      { text: "Professional", color: 'blue', animation: 'glow' },
+      { text: "encapsulation", color: 'green', animation: 'bounce' },
+      { text: "protects and insulates", color: 'green', animation: 'pulse' }
+    ]
   },
   {
     id: 23,
@@ -269,7 +369,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/24-attic-ductwork-crushed.JPG",
     textAnimation: 'split',
     titleAnimation: 'typewriter',
-    background: 'from-purple-900/30 to-indigo-900/30'
+    background: 'from-purple-900/30 to-indigo-900/30',
+    highlights: [
+      { text: "Crushed ductwork", color: 'red', animation: 'shake' },
+      { text: "restricts airflow", color: 'red', animation: 'pulse' },
+      { text: "reduces efficiency", color: 'yellow', animation: 'wave' }
+    ]
   },
   {
     id: 24,
@@ -279,7 +384,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/25-attic-spray-foam-ductwork-after.JPG",
     textAnimation: 'focus',
     titleAnimation: 'slide',
-    background: 'from-emerald-900/30 to-green-900/30'
+    background: 'from-emerald-900/30 to-green-900/30',
+    highlights: [
+      { text: "thermal protection", color: 'green', animation: 'glow' },
+      { text: "structural support", color: 'blue', animation: 'bounce' },
+      { text: "encapsulation provides", color: 'green', animation: 'pulse' }
+    ]
   },
   {
     id: 25,
@@ -289,7 +399,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/27-attic-spray-foam-skylight-after.JPG",
     textAnimation: 'blur',
     titleAnimation: 'explosion',
-    background: 'from-cyan-900/30 to-blue-900/30'
+    background: 'from-cyan-900/30 to-blue-900/30',
+    highlights: [
+      { text: "specialized treatment", color: 'blue', animation: 'glow' },
+      { text: "eliminate", color: 'green', animation: 'bounce' },
+      { text: "thermal bridging", color: 'red', animation: 'wave' }
+    ]
   },
   {
     id: 26,
@@ -299,7 +414,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/28-attic-spray-foam-airseal-air-barrier.JPG",
     textAnimation: 'typewriter',
     titleAnimation: 'bounce',
-    background: 'from-lime-900/30 to-emerald-900/30'
+    background: 'from-lime-900/30 to-emerald-900/30',
+    highlights: [
+      { text: "continuous air barrier", color: 'green', animation: 'glow' },
+      { text: "entire attic space", color: 'blue', animation: 'wave' },
+      { text: "Professional", color: 'blue', animation: 'pulse' }
+    ]
   },
   {
     id: 27,
@@ -309,7 +429,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/29-attic-insulation-distrubed-animals.JPG",
     textAnimation: 'split',
     titleAnimation: 'focus',
-    background: 'from-brown-900/30 to-orange-900/30'
+    background: 'from-brown-900/30 to-orange-900/30',
+    highlights: [
+      { text: "disturb and contaminate", color: 'red', animation: 'shake' },
+      { text: "traditional insulation", color: 'yellow', animation: 'wave' },
+      { text: "reducing effectiveness", color: 'red', animation: 'pulse' }
+    ]
   },
   {
     id: 28,
@@ -319,7 +444,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/30-attic-insulation-removed-by-animals.JPG",
     textAnimation: 'explosion',
     titleAnimation: 'blur',
-    background: 'from-gray-900/30 to-slate-900/30'
+    background: 'from-gray-900/30 to-slate-900/30',
+    highlights: [
+      { text: "Severe animal damage", color: 'red', animation: 'shake' },
+      { text: "complete removal", color: 'red', animation: 'pulse' },
+      { text: "replacement", color: 'blue', animation: 'bounce' }
+    ]
   },
   {
     id: 29,
@@ -329,7 +459,13 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/31-attic-cellulose-insulation-finished.JPG",
     textAnimation: 'slide',
     titleAnimation: 'typewriter',
-    background: 'from-amber-900/30 to-yellow-900/30'
+    background: 'from-amber-900/30 to-yellow-900/30',
+    highlights: [
+      { text: "effective thermal performance", color: 'green', animation: 'glow' },
+      { text: "deters pests", color: 'blue', animation: 'bounce' },
+      { text: "superior thermal resistance", color: 'green', animation: 'pulse' },
+      { text: "year-round comfort", color: 'green', animation: 'wave' }
+    ]
   },
   {
     id: 30,
@@ -339,7 +475,12 @@ const storyScenes: StoryScene[] = [
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
     textAnimation: 'bounce',
     titleAnimation: 'explosion',
-    background: 'from-green-900/20 to-emerald-900/20'
+    background: 'from-green-900/20 to-emerald-900/20',
+    highlights: [
+      { text: "Contact us today", color: 'green', animation: 'bounce' },
+      { text: "free attic assessment", color: 'blue', animation: 'glow' },
+      { text: "how much you could save", color: 'green', animation: 'pulse' }
+    ]
   }
 ];
 
@@ -380,13 +521,12 @@ const ScrollStorySystem: React.FC = () => {
     setUserInteracted(true);
     stopAutoPlay();
     
-    // Resume autoplay after 3 seconds of no interaction
+    // Resume autoplay after 5 seconds of no interaction
     setTimeout(() => {
-      if (!userInteracted) {
-        setIsAutoPlaying(true);
-        startAutoPlay();
-      }
-    }, 3000);
+      setUserInteracted(false);
+      setIsAutoPlaying(true);
+      startAutoPlay();
+    }, 5000);
   };
 
   // Navigation functions
@@ -438,11 +578,11 @@ const ScrollStorySystem: React.FC = () => {
 
   // Start autoplay when component mounts and scene changes
   useEffect(() => {
-    if (isInitialized && isAutoPlaying) {
+    if (isInitialized && isAutoPlaying && !userInteracted) {
       startAutoPlay();
     }
     return () => stopAutoPlay();
-  }, [currentScene, isAutoPlaying, isInitialized]);
+  }, [currentScene, isAutoPlaying, isInitialized, userInteracted]);
 
   useEffect(() => {
     const checkIsMobile = window.innerWidth <= 768;
@@ -454,8 +594,11 @@ const ScrollStorySystem: React.FC = () => {
       
       lastScrollTime = Date.now();
       
-      // Handle user interaction (pause autoplay)
-      handleUserInteraction();
+      // Only handle user interaction if this is actual user scrolling, not programmatic
+      const now = Date.now();
+      if (now - lastScrollTime < 50) {
+        handleUserInteraction();
+      }
       
       // Don't update scenes while snapping
       if (isSnapping) return;
@@ -556,6 +699,8 @@ const ScrollStorySystem: React.FC = () => {
       setBackgroundImage('/attics/background.jpg'); // Force the correct path
       setScrollProgress(0);
       setIsInitialized(true);
+      setIsAutoPlaying(true);
+      setUserInteracted(false);
       
       // Scroll to top to ensure we start at scene 0
       window.scrollTo(0, 0);
@@ -652,7 +797,7 @@ const ScrollStorySystem: React.FC = () => {
     };
   }, []); // Remove currentScene dependency to prevent loops
 
-  // Additional failsafe to ensure we start at scene 0
+  // Additional failsafe to ensure we start at scene 0 and begin autoplay
   useEffect(() => {
     if (!isInitialized) {
       setTimeout(() => {
@@ -660,6 +805,13 @@ const ScrollStorySystem: React.FC = () => {
         setCurrentScene(0);
         setBackgroundImage('/attics/background.jpg');
       }, 100);
+    } else {
+      // Start autoplay after initialization
+      setTimeout(() => {
+        if (isAutoPlaying && !userInteracted) {
+          startAutoPlay();
+        }
+      }, 1000); // Wait 1 second after init to start autoplay
     }
   }, [isInitialized]);
 
