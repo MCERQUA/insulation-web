@@ -438,8 +438,8 @@ const ScrollStorySystem: React.FC = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const targetScroll = (sceneIndex / (storyScenes.length - 1)) * scrollHeight;
       
-      // Prevent default scroll behavior during snap
-      document.body.style.overflow = 'hidden';
+      // Temporarily disable user scrolling during snap
+      setIsSnapping(true);
       
       window.scrollTo({
         top: targetScroll,
@@ -448,7 +448,6 @@ const ScrollStorySystem: React.FC = () => {
       
       setTimeout(() => {
         setIsSnapping(false);
-        document.body.style.overflow = 'auto';
       }, 800); // Longer timeout to ensure snap completes
     };
 
@@ -456,6 +455,34 @@ const ScrollStorySystem: React.FC = () => {
     const initialize = () => {
       // Set appropriate height for 31 scenes with consistent 3-click transitions
       document.body.style.height = '1500vh';
+      
+      // Hide scrollbar visually but allow scrolling functionality
+      document.body.style.scrollbarWidth = 'none'; // Firefox
+      document.body.style.msOverflowStyle = 'none'; // IE/Edge
+      
+      // Add CSS to hide webkit scrollbars but maintain scroll functionality
+      const styleId = 'story-scrollbar-hide';
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          body::-webkit-scrollbar,
+          html::-webkit-scrollbar {
+            display: none;
+            width: 0px;
+            background: transparent;
+          }
+          body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-y: scroll;
+          }
+          html {
+            overflow-y: scroll;
+          }
+        `;
+        document.head.appendChild(style);
+      }
       
       // Add touch-action for mobile support
       document.body.style.touchAction = 'pan-y';
@@ -540,10 +567,19 @@ const ScrollStorySystem: React.FC = () => {
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('keydown', handleKeyPress);
+      
+      // Restore normal scrolling behavior
       document.body.style.height = 'auto';
       document.body.style.touchAction = 'auto';
       document.documentElement.style.touchAction = 'auto';
-      document.body.style.overflow = 'auto';
+      document.body.style.scrollbarWidth = 'auto';
+      document.body.style.msOverflowStyle = 'auto';
+      
+      // Remove the custom scrollbar hiding styles
+      const customStyle = document.getElementById('story-scrollbar-hide');
+      if (customStyle) {
+        customStyle.remove();
+      }
       
       if (snapTimeoutRef.current) {
         clearTimeout(snapTimeoutRef.current);
