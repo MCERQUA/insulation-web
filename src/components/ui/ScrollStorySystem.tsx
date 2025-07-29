@@ -32,9 +32,13 @@ const storyScenes: StoryScene[] = [
     subtitle: "On Your Attic Insulation",
     description: "Welcome to a journey that will reveal the hidden truth about what's happening above your head...",
     image: "/attics/background.jpg",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
-    background: 'from-blue-900/20 to-indigo-900/20'
+    textAnimation: 'explosion',
+    titleAnimation: 'focus',
+    background: 'from-blue-900/20 to-indigo-900/20',
+    highlights: [
+      { text: "SHINING", color: 'yellow', animation: 'glow' },
+      { text: "LIGHT", color: 'blue', animation: 'pulse' }
+    ]
   },
   {
     id: 1,
@@ -489,6 +493,8 @@ const ScrollStorySystem: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [backgroundImage, setBackgroundImage] = useState('/attics/background.jpg'); // Force start with background.jpg
+  const [previousBackgroundImage, setPreviousBackgroundImage] = useState('/attics/background.jpg');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isSnapping, setIsSnapping] = useState(false);
   const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -497,6 +503,25 @@ const ScrollStorySystem: React.FC = () => {
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
   const isProgrammaticScrollRef = useRef(false);
+
+  // Background transition function
+  const transitionToNewBackground = (newImage: string) => {
+    if (newImage !== backgroundImage) {
+      setPreviousBackgroundImage(backgroundImage);
+      setIsTransitioning(true);
+      
+      // Small delay to ensure previous image is set
+      setTimeout(() => {
+        setBackgroundImage(newImage);
+        
+        // Complete transition after animation
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setPreviousBackgroundImage(newImage);
+        }, 1000); // Match the transition duration
+      }, 50);
+    }
+  };
 
   // Autoplay functions
   const startAutoPlay = () => {
@@ -535,7 +560,7 @@ const ScrollStorySystem: React.FC = () => {
     if (currentScene < storyScenes.length - 1) {
       const nextScene = currentScene + 1;
       setCurrentScene(nextScene);
-      setBackgroundImage(storyScenes[nextScene].image);
+      transitionToNewBackground(storyScenes[nextScene].image);
       
       // Update scroll position to match the scene
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -567,7 +592,7 @@ const ScrollStorySystem: React.FC = () => {
     if (currentScene > 0) {
       const prevScene = currentScene - 1;
       setCurrentScene(prevScene);
-      setBackgroundImage(storyScenes[prevScene].image);
+      transitionToNewBackground(storyScenes[prevScene].image);
       
       // Update scroll position to match the scene
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -627,7 +652,7 @@ const ScrollStorySystem: React.FC = () => {
       
       if (clampedIndex !== currentScene) {
         setCurrentScene(clampedIndex);
-        setBackgroundImage(storyScenes[clampedIndex].image);
+        transitionToNewBackground(storyScenes[clampedIndex].image);
       }
       
       // On mobile, always snap to scene after scroll stops
@@ -833,18 +858,31 @@ const ScrollStorySystem: React.FC = () => {
 
   return (
     <>
-      {/* Dynamic background image */}
+      {/* Dynamic background images with crossfade */}
+      {/* Previous background layer - visible when not transitioning or during fade out */}
       <motion.div
         className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: `url('${previousBackgroundImage}')`,
+          backgroundSize: currentScene === 0 ? 'cover' : (isMobile ? 'contain' : 'cover'),
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+        animate={{ opacity: isTransitioning ? 0 : 1 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+      />
+      
+      {/* Current background layer - visible when transitioning or when transition complete */}
+      <motion.div
+        className="fixed inset-0 z-1"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: currentScene === 0 ? 'cover' : (isMobile ? 'contain' : 'cover'),
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        animate={{ opacity: isTransitioning ? 1 : 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
       />
       
       {/* Gradient overlay */}
@@ -932,9 +970,10 @@ const ScrollStorySystem: React.FC = () => {
             >
               {/* Title */}
               <div className="mb-6">
-                <CinematicText
+                <SimpleCinematicHighlightText
                   text={currentStoryScene.title}
                   type={currentStoryScene.titleAnimation}
+                  highlights={currentStoryScene.highlights}
                   className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-wider leading-tight text-center"
                   style={{
                     textShadow: `
@@ -1066,9 +1105,10 @@ const ScrollStorySystem: React.FC = () => {
               >
                 {/* Title */}
                 <div className="mb-4">
-                  <CinematicText
+                  <SimpleCinematicHighlightText
                     text={currentStoryScene.title}
                     type={currentStoryScene.titleAnimation}
+                    highlights={currentStoryScene.highlights}
                     className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wider leading-tight text-center"
                     style={{
                       textShadow: `
