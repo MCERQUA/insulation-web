@@ -5,36 +5,36 @@ import { formatDate } from '../../utils/formatDate';
 // In a real implementation, you would fetch blog posts from a CMS or markdown files
 const blogPosts = [
   {
-    slug: 'complete-gun-range-insurance-guide',
-    title: 'EXPOSED: The Shocking Insurance Gaps That Could Shut Down Your Range Tomorrow',
-    excerpt: 'Discover the critical insurance coverage gaps that could bankrupt your gun range overnight. Our comprehensive guide reveals the essential protections every range owner needs.',
+    slug: 'complete-attic-insulation-guide',
+    title: 'EXPOSED: The Hidden Energy Drain in Your Attic That\'s Costing You Thousands',
+    excerpt: 'Discover the shocking truth about attic insulation failures that are silently draining your energy dollars. Our comprehensive guide reveals the critical areas most homeowners never know exist.',
     date: new Date('2024-01-20'),
-    author: 'Gun Range Insurance Expert Team',
-    image: '/images/complete-gun-range-guide.jpg'
+    author: 'Home Performance Expert Team',
+    image: '/images/attics/complete-attic-guide.jpg'
   },
   {
-    slug: 'understanding-gun-range-insurance',
-    title: 'Understanding Gun Range Insurance: A Complete Guide',
-    excerpt: 'Learn about the essential insurance coverage every gun range needs to protect their business and customers.',
+    slug: 'understanding-spray-foam-insulation',
+    title: 'Understanding Spray Foam Insulation: A Complete Homeowner\'s Guide',
+    excerpt: 'Learn about the revolutionary insulation technology that creates an impermeable air barrier and transforms your home\'s energy efficiency.',
     date: new Date('2024-01-15'),
-    author: 'Insurance Expert',
-    image: '/images/gun-range-safety.jpg'
+    author: 'Insulation Specialist',
+    image: '/images/attics/spray-foam-guide.jpg'
   },
   {
-    slug: 'liability-coverage-essentials',
-    title: 'Liability Coverage Essentials for Shooting Ranges',
-    excerpt: 'Discover the key liability protections that can safeguard your shooting range from potential claims.',
+    slug: 'air-sealing-essentials',
+    title: 'Air Sealing Essentials: Stop Energy Loss at the Source',
+    excerpt: 'Discover how proper air sealing can eliminate up to 40% of your energy loss and create lasting comfort in your home.',
     date: new Date('2024-01-10'),
-    author: 'Risk Management Team',
-    image: '/images/range-insurance.jpg'
+    author: 'Energy Efficiency Team',
+    image: '/images/attics/air-sealing.jpg'
   },
   {
-    slug: 'safety-protocols-insurance',
-    title: 'How Safety Protocols Impact Your Insurance Rates',
-    excerpt: 'Implementing proper safety measures can significantly reduce your insurance premiums while protecting your business.',
+    slug: 'cold-climate-insulation-solutions',
+    title: 'Cold Climate Insulation: Preventing Ice Dams and Frost Damage',
+    excerpt: 'Learn how proper insulation and air sealing prevent costly ice dams, frost damage, and mold growth in harsh winter climates.',
     date: new Date('2024-01-05'),
-    author: 'Safety Consultant',
-    image: '/images/safety-first.jpg'
+    author: 'Cold Climate Specialist',
+    image: '/images/attics/cold-climate.jpg'
   }
 ];
 
@@ -43,19 +43,19 @@ const sortedPosts = blogPosts.sort((a, b) => b.date.getTime() - a.date.getTime()
 ---
 
 <BaseLayout 
-  title="Gun Range Insurance Blog - Expert Insights & Tips"
-  description="Expert guidance on gun range insurance, safety protocols, and risk management. Get insights from industry professionals on liability coverage, property insurance, and best practices for firearms businesses."
-  keywords="gun range insurance blog, shooting range safety, firearms business insurance tips, liability coverage advice, gun range risk management, insurance industry insights"
+  title="Home Insulation Blog - Expert Energy Efficiency Insights & Tips"
+  description="Expert guidance on home insulation, spray foam installation, air sealing, and energy efficiency. Get insights from industry professionals on attic insulation, home performance, and weatherization best practices."
+  keywords="home insulation blog, spray foam insulation, air sealing tips, energy efficiency advice, attic insulation guide, home performance insights, weatherization blog"
 >
-  <div class="min-h-screen bg-gradient-to-br from-tactical-black via-gunmetal to-steel">
+  <div class="min-h-screen bg-gradient-to-br from-professional-slate via-deep-navy to-insulation-blue">
     <!-- Hero Section -->
     <section class="pt-32 pb-16 px-4">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-target-red via-safety-orange to-brass bg-clip-text text-transparent">
-          Insurance Insights
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-thermal-green via-efficiency-teal to-energy-yellow bg-clip-text text-transparent">
+          Energy Efficiency Insights
         </h1>
-        <p class="text-xl text-silver max-w-2xl mx-auto">
-          Expert guidance on gun range insurance, safety protocols, and risk management from industry professionals.
+        <p class="text-xl text-clean-white max-w-2xl mx-auto">
+          Expert guidance on home insulation, spray foam installation, air sealing, and energy efficiency from industry professionals.
         </p>
       </div>
     </section>
@@ -67,32 +67,32 @@ const sortedPosts = blogPosts.sort((a, b) => b.date.getTime() - a.date.getTime()
           {sortedPosts.map((post) => (
             <article class="group">
               <a href={`/blog/${post.slug}`} class="block">
-                <div class="bg-gradient-to-br from-gunmetal/80 to-steel/60 backdrop-blur-sm border border-silver/20 rounded-lg overflow-hidden hover:border-target-red/50 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(231,76,60,0.3)]">
+                <div class="bg-gradient-to-br from-comfort-gray/80 to-soft-gray/60 backdrop-blur-sm border border-clean-white/20 rounded-lg overflow-hidden hover:border-thermal-green/50 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(78,186,112,0.3)]">
                   <!-- Post Image Placeholder -->
-                  <div class="h-48 bg-gradient-to-br from-tactical-black to-gunmetal flex items-center justify-center">
-                    <div class="w-16 h-16 rounded-full bg-target-red/20 flex items-center justify-center">
-                      <svg class="w-8 h-8 text-target-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                  <div class="h-48 bg-gradient-to-br from-professional-slate to-deep-navy flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-thermal-green/20 flex items-center justify-center">
+                      <svg class="w-8 h-8 text-thermal-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z M3 7l9 6 9-6"></path>
                       </svg>
                     </div>
                   </div>
                   
                   <div class="p-6">
-                    <div class="flex items-center text-sm text-brass mb-3">
+                    <div class="flex items-center text-sm text-energy-yellow mb-3">
                       <time>{formatDate(post.date)}</time>
                       <span class="mx-2">•</span>
                       <span>{post.author}</span>
                     </div>
                     
-                    <h2 class="text-xl font-bold text-white mb-3 group-hover:text-target-red transition-colors">
+                    <h2 class="text-xl font-bold text-clean-white mb-3 group-hover:text-thermal-green transition-colors">
                       {post.title}
                     </h2>
                     
-                    <p class="text-silver text-sm leading-relaxed">
+                    <p class="text-soft-gray text-sm leading-relaxed">
                       {post.excerpt}
                     </p>
                     
-                    <div class="mt-4 flex items-center text-target-red text-sm font-medium">
+                    <div class="mt-4 flex items-center text-thermal-green text-sm font-medium">
                       Read More
                       <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
