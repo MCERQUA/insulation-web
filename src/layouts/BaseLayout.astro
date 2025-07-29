@@ -16,13 +16,13 @@ const {
   title, 
   description = 'Home Performance Insulation - Professional spray foam insulation, air sealing, and energy efficiency solutions for maximum comfort and savings.',
   keywords = 'spray foam insulation, air sealing, home insulation, energy efficiency, attic insulation, home performance',
-  ogImage = '/images/insulation-og.jpg',
+  ogImage = '/images/share-card.jpg',
   canonicalUrl = Astro.url.href,
   noindex = false
 } = Astro.props;
 
 // Create absolute URLs safely
-const siteUrl = Astro.site?.href || 'https://insulation.netlify.app';
+const siteUrl = Astro.site?.href || 'https://homeperformanceinsulation.com';
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : new URL(canonicalUrl, siteUrl).href;
 ---
@@ -68,10 +68,17 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
     <meta name="twitter:creator" content="@homeperformanceinsulation" />
     
     <!-- Additional SEO Meta Tags -->
-    <meta name="theme-color" content="#2563eb" />
-    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="theme-color" content="#4eba70" />
+    <meta name="msapplication-TileColor" content="#4eba70" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Business Information -->
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="DC.title" content={title} />
+    <meta name="DC.subject" content="Home Insulation, Spray Foam, Energy Efficiency" />
+    <meta name="DC.description" content={description} />
     
     <!-- Structured Data for Organization -->
     <script type="application/ld+json">
@@ -79,7 +86,7 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
         "@context": "https://schema.org",
         "@type": "HomeImprovementBusiness",
         "name": "Home Performance Insulation",
-        "description": "Professional spray foam insulation, air sealing, and home performance solutions for energy efficiency",
+        "description": "Shining light on attic insulation problems. Professional spray foam insulation, air sealing, and home performance solutions for maximum energy efficiency and comfort",
         "url": siteUrl,
         "logo": new URL('/images/logo.png', siteUrl).href,
         "image": absoluteOgImage,
@@ -125,6 +132,59 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
       }
     </script>
     
+    <!-- Additional Structured Data for WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Home Performance Insulation",
+        "description": "Professional home insulation and energy efficiency solutions",
+        "url": siteUrl,
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": siteUrl + "/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is spray foam insulation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Spray foam insulation is a revolutionary insulation technology that creates an impermeable air barrier, providing superior energy efficiency and thermal performance compared to traditional insulation materials."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does air sealing improve energy efficiency?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Air sealing eliminates gaps, cracks, and leakage points that allow heated or cooled air to escape, reducing energy loss by up to 40% and improving home comfort."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the benefits of attic insulation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Proper attic insulation prevents energy loss, reduces heating and cooling costs, prevents ice dams, eliminates drafts, and improves overall home comfort and air quality."
+            }
+          }
+        ]
+      }
+    </script>
+    
     <!-- Favicon configuration -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -138,6 +198,7 @@ const absoluteCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : ne
     
     <!-- Preload critical resources -->
     <link rel="preload" as="image" href="/images/attics/background.jpg" />
+    <link rel="preload" as="image" href="/images/share-card.jpg" />
     
     <style>
       /* Background image for all pages - with higher specificity */

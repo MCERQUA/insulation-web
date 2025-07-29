@@ -17,7 +17,7 @@ const pageTitle = `${title} - Home Performance Insulation Blog`;
 const siteUrl = Astro.site?.href || 'https://homeperformanceinsulation.com';
 const absoluteImage = image ? 
   (image.startsWith('http') ? image : new URL(image, siteUrl).href) : 
-  new URL('/images/home-insulation-og.jpg', siteUrl).href;
+  new URL('/images/share-card.jpg', siteUrl).href;
 ---
 
 <BaseLayout title={pageTitle} description={excerpt}>
