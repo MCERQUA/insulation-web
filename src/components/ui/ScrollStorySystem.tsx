@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CinematicText from './CinematicText';
 import ColdClimateStamp from './ColdClimateStamp';
-import AnimatedHighlightText from './AnimatedHighlightText';
+import CinematicHighlightText from './CinematicHighlightText';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HighlightConfig {
@@ -42,8 +42,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "The Unseen Story",
     description: "Your attic may look fine from the hatch, but the real story is happening where you can't see. Even when your attic appears to have plenty of insulation, it's the hidden areas that matter most.",
     image: "/images/attics/1-attic-insulation-low-slop-looks-deceiving.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'slide',
+    titleAnimation: 'explosion',
     background: 'from-red-900/30 to-orange-900/30',
     highlights: [
       { text: "can't see", color: 'red', animation: 'pulse' },
@@ -56,8 +56,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Low Slope Reality",
     description: "With the roof sheathing removed, we can see these hidden areas for the shocking reality. Low slope roofs create impossible-to-insulate spaces that most homeowners never know exist.",
     image: "/images/attics/2-Low-Slope-roof-outside-view.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'blur',
+    titleAnimation: 'bounce',
     background: 'from-blue-900/30 to-cyan-900/30'
   },
   {
@@ -66,8 +66,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "The Plot Thickens",
     description: "Closer inspection reveals the devastating truth - bare spots with no insulation left completely empty where protection is needed most. Low slopes make it impossible to properly insulate these critical areas.",
     image: "/images/attics/3-Low-Slope-roof-outside-view-closeup.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'split',
+    titleAnimation: 'focus',
     background: 'from-purple-900/30 to-pink-900/30'
   },
   {
@@ -76,8 +76,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Top Plate Catastrophe",
     description: "Here's where your energy dollars are escaping - there's no protection or insulation where heat loss is most critical.",
     image: "/images/attics/4-Low-Slope-roof-outside-view-closeup-top-plate-edge.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'typewriter',
+    titleAnimation: 'explosion',
     background: 'from-yellow-900/30 to-red-900/30',
     highlights: [
       { text: "energy dollars", color: 'red', animation: 'shake' },
@@ -91,8 +91,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Evidence of Energy Loss",
     description: "Frost formation reveals exactly where your heated air is escaping into the cold attic space...",
     image: "/images/attics/5-attic-outside-top-plate-low-slope-frost-closeup.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'bounce',
+    titleAnimation: 'slide',
     background: 'from-cyan-900/30 to-blue-900/30',
     highlights: [
       { text: "reveals exactly", color: 'blue', animation: 'glow' },
@@ -105,8 +105,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Cold Climate Consequences",
     description: "Frost melting and refreezing creates ice dams, causing serious damage to your home's structure and interior...",
     image: "/images/attics/6-attic-outside-top-plate-low-slope-frost.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'explosion',
+    titleAnimation: 'blur',
     background: 'from-indigo-900/30 to-purple-900/30'
   },
   {
@@ -115,8 +115,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Health Hazard Alert",
     description: "Poor insulation leads to condensation, which leads to mold. Your family's health is at risk...",
     image: "/images/attics/7-ceiling-corner-mold-low-slope-no-insulation2.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'focus',
+    titleAnimation: 'typewriter',
     background: 'from-green-900/30 to-emerald-900/30',
     highlights: [
       { text: "mold", color: 'red', animation: 'pulse' },
@@ -129,8 +129,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Spray Foam Victory",
     description: "Professional spray foam insulation creates an impermeable barrier, solving the problem permanently...",
     image: "/images/attics/9-attic-spray-foam-top-plates-low-slope.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'slide',
+    titleAnimation: 'bounce',
     background: 'from-lime-900/30 to-green-900/30',
     highlights: [
       { text: "impermeable barrier", color: 'blue', animation: 'glow' },
@@ -143,8 +143,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Energy Efficiency Achieved",
     description: "Proper spray foam and ventilation create the perfect attic environment - saving energy and preventing problems...",
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'split',
+    titleAnimation: 'explosion',
     background: 'from-emerald-900/30 to-teal-900/30'
   },
   {
@@ -153,8 +153,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Energy Hemorrhage Zone",
     description: "Inside the attic, the top plate shows clear signs of air leakage and thermal bridging...",
     image: "/images/attics/11-Attic-inside-top-plate-Before.jpg",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'blur',
+    titleAnimation: 'focus',
     background: 'from-orange-900/30 to-red-900/30'
   },
   {
@@ -163,8 +163,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Sealed Perfection",
     description: "After professional spray foam application, the top plate is completely air sealed...",
     image: "/images/attics/12-Attic-inside-top-plate-after.jpg",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'typewriter',
+    titleAnimation: 'slide',
     background: 'from-green-900/30 to-teal-900/30'
   },
   {
@@ -173,8 +173,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Total Air Barrier",
     description: "Comprehensive air-sealing targets all the little gaps, cracks, and tiny leakage points that add up to massive energy loss.",
     image: "/images/attics/13-Attic-inside-top-plate-after-2.jpg",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'bounce',
+    titleAnimation: 'blur',
     background: 'from-blue-900/30 to-indigo-900/30'
   },
   {
@@ -183,8 +183,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Open Top Plate Crisis",
     description: "Old balloon frame construction creates massive air leakage pathways - wide open down entire wall in older homes.",
     image: "/images/attics/14-open-top-plate-old-balloon-frame-before.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'explosion',
+    titleAnimation: 'typewriter',
     background: 'from-red-900/30 to-orange-900/30'
   },
   {
@@ -193,8 +193,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Modern Construction Issues",
     description: "Even modern construction has massive air leakages - it's not just cracks and gaps in new construction.",
     image: "/images/attics/16-attic-air-loss-before-airsealing-sprayfoam.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'focus',
+    titleAnimation: 'bounce',
     background: 'from-yellow-900/30 to-red-900/30'
   },
   {
@@ -203,8 +203,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Hidden Energy Drain",
     description: "Even modern construction can have massive air loss. This void shows that it's not just old homes - new construction can have devastating gaps too.",
     image: "/images/attics/18-attic-air-sealing-large-void-before-foam.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'split',
+    titleAnimation: 'explosion',
     background: 'from-purple-900/30 to-pink-900/30'
   },
   {
@@ -213,8 +213,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Spray Foam Victory",
     description: "Professional spray foam completely seals even the most challenging balloon frame openings.",
     image: "/images/attics/15-open-top-plate-old-balloon-frame-after-spray-foam.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'slide',
+    titleAnimation: 'focus',
     background: 'from-green-900/30 to-emerald-900/30'
   },
   {
@@ -223,8 +223,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Non-Foam Insulations Don't Last",
     description: "Non-foam insulations that don't last forever, causing huge heat loss issues.",
     image: "/images/attics/20-attic-ductwork-before-spray-foam.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'blur',
+    titleAnimation: 'slide',
     background: 'from-orange-900/30 to-red-900/30',
     highlights: [
       { text: "don't last forever", color: 'red', animation: 'wave' },
@@ -237,8 +237,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Energy Hemorrhage",
     description: "Loose and leaky ductwork connections waste conditioned air directly into the attic.",
     image: "/images/attics/21-attic-ductwork-before-spray-foam-loose-leaky.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'typewriter',
+    titleAnimation: 'bounce',
     background: 'from-red-900/30 to-rose-900/30'
   },
   {
@@ -247,8 +247,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Critical Failure",
     description: "Split ductwork dumps expensive conditioned air directly into the unconditioned attic...",
     image: "/images/attics/22-attic-ductwork-split-open-leaking-into-attic.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'explosion',
+    titleAnimation: 'focus',
     background: 'from-yellow-900/30 to-orange-900/30'
   },
   {
@@ -257,8 +257,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "After Spray Foam",
     description: "Professional spray foam encapsulation protects and insulates all ductwork...",
     image: "/images/attics/23-attic-ductwork-after-spray-foam.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'bounce',
+    titleAnimation: 'blur',
     background: 'from-green-900/30 to-teal-900/30'
   },
   {
@@ -267,8 +267,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Airflow Restriction",
     description: "Crushed ductwork restricts airflow and reduces HVAC system efficiency...",
     image: "/images/attics/24-attic-ductwork-crushed.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'split',
+    titleAnimation: 'typewriter',
     background: 'from-purple-900/30 to-indigo-900/30'
   },
   {
@@ -277,8 +277,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Ductwork Protection",
     description: "Spray foam encapsulation provides thermal protection and structural support for ductwork...",
     image: "/images/attics/25-attic-spray-foam-ductwork-after.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'focus',
+    titleAnimation: 'slide',
     background: 'from-emerald-900/30 to-green-900/30'
   },
   {
@@ -287,8 +287,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Light Well Treatment",
     description: "Skylights receive specialized spray foam treatment to eliminate thermal bridging...",
     image: "/images/attics/27-attic-spray-foam-skylight-after.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'blur',
+    titleAnimation: 'explosion',
     background: 'from-cyan-900/30 to-blue-900/30'
   },
   {
@@ -297,8 +297,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Thermal Envelope Perfection",
     description: "Professional spray foam creates a continuous air barrier throughout the entire attic space...",
     image: "/images/attics/28-attic-spray-foam-airseal-air-barrier.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'typewriter',
+    titleAnimation: 'bounce',
     background: 'from-lime-900/30 to-emerald-900/30'
   },
   {
@@ -307,8 +307,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Insulation Disturbed",
     description: "Animals can disturb and contaminate traditional insulation, reducing its effectiveness...",
     image: "/images/attics/29-attic-insulation-distrubed-animals.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'split',
+    titleAnimation: 'focus',
     background: 'from-brown-900/30 to-orange-900/30'
   },
   {
@@ -317,8 +317,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Animals Destroy Insulation",
     description: "Severe animal damage requires complete insulation removal and replacement...",
     image: "/images/attics/30-attic-insulation-removed-by-animals.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'explosion',
+    titleAnimation: 'blur',
     background: 'from-gray-900/30 to-slate-900/30'
   },
   {
@@ -327,8 +327,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Traditional Insulation",
     description: "When appropriate, cellulose insulation provides effective thermal performance. Fresh cellulose insulation also deters pests while providing superior thermal resistance for year-round comfort.",
     image: "/images/attics/31-attic-cellulose-insulation-finished.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'slide',
+    titleAnimation: 'typewriter',
     background: 'from-amber-900/30 to-yellow-900/30'
   },
   {
@@ -337,8 +337,8 @@ const storyScenes: StoryScene[] = [
     subtitle: "Ready to Begin?",
     description: "Contact us today for your free attic assessment and discover how much you could save...",
     image: "/images/attics/10-attic-spray-foam-and-ventilation.JPG",
-    textAnimation: 'fade',
-    titleAnimation: 'fade',
+    textAnimation: 'bounce',
+    titleAnimation: 'explosion',
     background: 'from-green-900/20 to-emerald-900/20'
   }
 ];
@@ -702,42 +702,24 @@ const ScrollStorySystem: React.FC = () => {
               
               {/* Description */}
               <div className="mb-8">
-                {currentStoryScene.highlights && currentStoryScene.highlights.length > 0 ? (
-                  <AnimatedHighlightText
-                    text={currentStoryScene.description}
-                    highlights={currentStoryScene.highlights}
-                    className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto text-center"
-                    style={{
-                      textShadow: `
-                        0 0 10px rgba(0, 0, 0, 0.9),
-                        0 0 20px rgba(0, 0, 0, 0.8),
-                        2px 2px 4px rgba(0, 0, 0, 1),
-                        3px 3px 6px rgba(0, 0, 0, 0.8)
-                      `
-                    }}
-                    duration={1.2}
-                    delay={0.6}
-                    trigger={true}
-                  />
-                ) : (
-                  <CinematicText
-                    text={currentStoryScene.description}
-                    type={currentStoryScene.textAnimation}
-                    className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
-                    style={{
-                      textShadow: `
-                        0 0 10px rgba(0, 0, 0, 0.9),
-                        0 0 20px rgba(0, 0, 0, 0.8),
-                        2px 2px 4px rgba(0, 0, 0, 1),
-                        3px 3px 6px rgba(0, 0, 0, 0.8)
-                      `
-                    }}
-                    duration={1.2}
-                    delay={0.6}
-                    splitBy="words"
-                    trigger={true}
-                  />
-                )}
+                <CinematicHighlightText
+                  text={currentStoryScene.description}
+                  type={currentStoryScene.textAnimation}
+                  highlights={currentStoryScene.highlights}
+                  className="text-xl md:text-2xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                  style={{
+                    textShadow: `
+                      0 0 10px rgba(0, 0, 0, 0.9),
+                      0 0 20px rgba(0, 0, 0, 0.8),
+                      2px 2px 4px rgba(0, 0, 0, 1),
+                      3px 3px 6px rgba(0, 0, 0, 0.8)
+                    `
+                  }}
+                  duration={1.2}
+                  delay={0.6}
+                  splitBy="words"
+                  trigger={true}
+                />
               </div>
               
               {/* Navigation arrows for first scene only */}
@@ -858,42 +840,24 @@ const ScrollStorySystem: React.FC = () => {
               >
                 {/* Description */}
                 <div className="mb-8">
-                  {currentStoryScene.highlights && currentStoryScene.highlights.length > 0 ? (
-                    <AnimatedHighlightText
-                      text={currentStoryScene.description}
-                      highlights={currentStoryScene.highlights}
-                      className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto text-center"
-                      style={{
-                        textShadow: `
-                          0 0 8px rgba(0, 0, 0, 0.9),
-                          0 0 16px rgba(0, 0, 0, 0.8),
-                          1px 1px 3px rgba(0, 0, 0, 1),
-                          2px 2px 6px rgba(0, 0, 0, 0.8)
-                        `
-                      }}
-                      duration={1.2}
-                      delay={0.6}
-                      trigger={true}
-                    />
-                  ) : (
-                    <CinematicText
-                      text={currentStoryScene.description}
-                      type={currentStoryScene.textAnimation}
-                      className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
-                      style={{
-                        textShadow: `
-                          0 0 8px rgba(0, 0, 0, 0.9),
-                          0 0 16px rgba(0, 0, 0, 0.8),
-                          1px 1px 3px rgba(0, 0, 0, 1),
-                          2px 2px 6px rgba(0, 0, 0, 0.8)
-                        `
-                      }}
-                      duration={1.2}
-                      delay={0.6}
-                      splitBy="words"
-                      trigger={true}
-                    />
-                  )}
+                  <CinematicHighlightText
+                    text={currentStoryScene.description}
+                    type={currentStoryScene.textAnimation}
+                    highlights={currentStoryScene.highlights}
+                    className="text-lg md:text-xl text-white font-medium leading-relaxed max-w-4xl mx-auto"
+                    style={{
+                      textShadow: `
+                        0 0 8px rgba(0, 0, 0, 0.9),
+                        0 0 16px rgba(0, 0, 0, 0.8),
+                        1px 1px 3px rgba(0, 0, 0, 1),
+                        2px 2px 6px rgba(0, 0, 0, 0.8)
+                      `
+                    }}
+                    duration={1.2}
+                    delay={0.6}
+                    splitBy="words"
+                    trigger={true}
+                  />
                 </div>
                 
                 {/* Scene indicator */}
