@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CinematicText from './CinematicText';
 import ColdClimateStamp from './ColdClimateStamp';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface StoryScene {
   id: number;
@@ -319,6 +320,41 @@ const ScrollStorySystem: React.FC = () => {
   const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Navigation functions
+  const goToNextSlide = () => {
+    if (currentScene < storyScenes.length - 1) {
+      const nextScene = currentScene + 1;
+      setCurrentScene(nextScene);
+      setBackgroundImage(storyScenes[nextScene].image);
+      
+      // Update scroll position to match the scene
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const targetScroll = (nextScene / (storyScenes.length - 1)) * scrollHeight;
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const goToPrevSlide = () => {
+    if (currentScene > 0) {
+      const prevScene = currentScene - 1;
+      setCurrentScene(prevScene);
+      setBackgroundImage(storyScenes[prevScene].image);
+      
+      // Update scroll position to match the scene
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const targetScroll = (prevScene / (storyScenes.length - 1)) * scrollHeight;
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   useEffect(() => {
     const checkIsMobile = window.innerWidth <= 768;
     setIsMobile(checkIsMobile);
@@ -452,11 +488,25 @@ const ScrollStorySystem: React.FC = () => {
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
     document.addEventListener('touchend', handleTouchEnd, { passive: true });
     
+    // Keyboard navigation
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        goToPrevSlide();
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        goToNextSlide();
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyPress);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('keydown', handleKeyPress);
       document.body.style.height = 'auto';
       document.body.style.touchAction = 'auto';
       document.documentElement.style.touchAction = 'auto';
@@ -511,6 +561,53 @@ const ScrollStorySystem: React.FC = () => {
           className="top-8 right-8 md:top-12 md:right-12" 
         />
       )}
+      
+      {/* Navigation Buttons */}
+      <div className="fixed inset-y-0 left-0 z-30 flex items-center">
+        <motion.button
+          onClick={goToPrevSlide}
+          disabled={currentScene === 0}
+          className={`ml-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
+            currentScene === 0 
+              ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
+              : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
+          }`}
+          style={{
+            backdropFilter: 'blur(10px)',
+            boxShadow: currentScene === 0 ? 'none' : '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
+          }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
+          whileHover={currentScene > 0 ? { scale: 1.1 } : {}}
+          whileTap={currentScene > 0 ? { scale: 0.95 } : {}}
+        >
+          <ChevronLeft size={24} className="md:w-8 md:h-8" />
+        </motion.button>
+      </div>
+      
+      <div className="fixed inset-y-0 right-0 z-30 flex items-center">
+        <motion.button
+          onClick={goToNextSlide}
+          disabled={currentScene === storyScenes.length - 1}
+          className={`mr-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
+            currentScene === storyScenes.length - 1 
+              ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
+              : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
+          }`}
+          style={{
+            backdropFilter: 'blur(10px)',
+            boxShadow: currentScene === storyScenes.length - 1 ? 'none' : '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
+          }}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
+          whileHover={currentScene < storyScenes.length - 1 ? { scale: 1.1 } : {}}
+          whileTap={currentScene < storyScenes.length - 1 ? { scale: 0.95 } : {}}
+        >
+          <ChevronRight size={24} className="md:w-8 md:h-8" />
+        </motion.button>
+      </div>
       
       {/* Story content container */}
       <div 
