@@ -28,7 +28,7 @@ interface StoryScene {
 const storyScenes: StoryScene[] = [
   {
     id: 0,
-    title: "SHEDDING LIGHT",
+    title: "SHINING LIGHT",
     subtitle: "On Your Attic Insulation",
     description: "Welcome to a journey that will reveal the hidden truth about what's happening above your head...",
     image: "/attics/background.jpg",
