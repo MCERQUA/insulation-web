@@ -563,11 +563,15 @@ const ScrollStorySystem: React.FC = () => {
       )}
       
       {/* Navigation Buttons */}
-      <div className="fixed inset-y-0 left-0 z-30 flex items-center">
+      <div className={`fixed z-30 flex items-center ${
+        currentScene === 0 
+          ? 'bottom-16 left-4 md:left-8' 
+          : 'inset-y-0 left-0'
+      }`}>
         <motion.button
           onClick={goToPrevSlide}
           disabled={currentScene === 0}
-          className={`ml-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
+          className={`${currentScene === 0 ? '' : 'ml-4'} p-3 md:p-4 rounded-full transition-all duration-300 ${
             currentScene === 0 
               ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
               : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
@@ -586,11 +590,15 @@ const ScrollStorySystem: React.FC = () => {
         </motion.button>
       </div>
       
-      <div className="fixed inset-y-0 right-0 z-30 flex items-center">
+      <div className={`fixed z-30 flex items-center ${
+        currentScene === 0 
+          ? 'bottom-16 right-4 md:right-8' 
+          : 'inset-y-0 right-0'
+      }`}>
         <motion.button
           onClick={goToNextSlide}
           disabled={currentScene === storyScenes.length - 1}
-          className={`mr-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
+          className={`${currentScene === 0 ? '' : 'mr-4'} p-3 md:p-4 rounded-full transition-all duration-300 ${
             currentScene === storyScenes.length - 1 
               ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
               : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
