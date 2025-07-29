@@ -562,60 +562,51 @@ const ScrollStorySystem: React.FC = () => {
         />
       )}
       
-      {/* Navigation Buttons */}
-      <div className={`fixed z-30 flex items-center ${
-        currentScene === 0 
-          ? 'bottom-16 left-4 md:left-8' 
-          : 'inset-y-0 left-0'
-      }`}>
-        <motion.button
-          onClick={goToPrevSlide}
-          disabled={currentScene === 0}
-          className={`${currentScene === 0 ? '' : 'ml-4'} p-3 md:p-4 rounded-full transition-all duration-300 ${
-            currentScene === 0 
-              ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
-              : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
-          }`}
-          style={{
-            backdropFilter: 'blur(10px)',
-            boxShadow: currentScene === 0 ? 'none' : '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
-          }}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-          whileHover={currentScene > 0 ? { scale: 1.1 } : {}}
-          whileTap={currentScene > 0 ? { scale: 0.95 } : {}}
-        >
-          <ChevronLeft size={24} className="md:w-8 md:h-8" />
-        </motion.button>
-      </div>
-      
-      <div className={`fixed z-30 flex items-center ${
-        currentScene === 0 
-          ? 'bottom-16 right-4 md:right-8' 
-          : 'inset-y-0 right-0'
-      }`}>
-        <motion.button
-          onClick={goToNextSlide}
-          disabled={currentScene === storyScenes.length - 1}
-          className={`${currentScene === 0 ? '' : 'mr-4'} p-3 md:p-4 rounded-full transition-all duration-300 ${
-            currentScene === storyScenes.length - 1 
-              ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
-              : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
-          }`}
-          style={{
-            backdropFilter: 'blur(10px)',
-            boxShadow: currentScene === storyScenes.length - 1 ? 'none' : '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
-          }}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-          whileHover={currentScene < storyScenes.length - 1 ? { scale: 1.1 } : {}}
-          whileTap={currentScene < storyScenes.length - 1 ? { scale: 0.95 } : {}}
-        >
-          <ChevronRight size={24} className="md:w-8 md:h-8" />
-        </motion.button>
-      </div>
+      {/* Navigation Buttons - Only show for scenes other than first */}
+      {currentScene !== 0 && (
+        <>
+          <div className="fixed inset-y-0 left-0 z-30 flex items-center">
+            <motion.button
+              onClick={goToPrevSlide}
+              className="ml-4 p-3 md:p-4 rounded-full transition-all duration-300 bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl"
+              style={{
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
+              }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ChevronLeft size={24} className="md:w-8 md:h-8" />
+            </motion.button>
+          </div>
+          
+          <div className="fixed inset-y-0 right-0 z-30 flex items-center">
+            <motion.button
+              onClick={goToNextSlide}
+              disabled={currentScene === storyScenes.length - 1}
+              className={`mr-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
+                currentScene === storyScenes.length - 1 
+                  ? 'bg-gray-600/30 text-gray-400 cursor-not-allowed' 
+                  : 'bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
+              }`}
+              style={{
+                backdropFilter: 'blur(10px)',
+                boxShadow: currentScene === storyScenes.length - 1 ? 'none' : '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
+              }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+              whileHover={currentScene < storyScenes.length - 1 ? { scale: 1.1 } : {}}
+              whileTap={currentScene < storyScenes.length - 1 ? { scale: 0.95 } : {}}
+            >
+              <ChevronRight size={24} className="md:w-8 md:h-8" />
+            </motion.button>
+          </div>
+        </>
+      )}
       
       {/* Story content container */}
       <div 
@@ -677,7 +668,7 @@ const ScrollStorySystem: React.FC = () => {
               )}
               
               {/* Description */}
-              <div className="mb-12">
+              <div className="mb-8">
                 <CinematicText
                   text={currentStoryScene.description}
                   type={currentStoryScene.textAnimation}
@@ -695,6 +686,39 @@ const ScrollStorySystem: React.FC = () => {
                   splitBy="words"
                   trigger={true}
                 />
+              </div>
+              
+              {/* Navigation arrows for first scene only */}
+              <div className="flex justify-between items-center mb-8 px-8 max-w-4xl mx-auto">
+                <motion.button
+                  onClick={goToPrevSlide}
+                  disabled={currentScene === 0}
+                  className="p-3 md:p-4 rounded-full transition-all duration-300 bg-gray-600/30 text-gray-400 cursor-not-allowed"
+                  style={{
+                    backdropFilter: 'blur(10px)'
+                  }}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.5, duration: 0.6 }}
+                >
+                  <ChevronLeft size={24} className="md:w-8 md:h-8" />
+                </motion.button>
+                
+                <motion.button
+                  onClick={goToNextSlide}
+                  className="p-3 md:p-4 rounded-full transition-all duration-300 bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl"
+                  style={{
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: '0 0 20px rgba(34, 197, 94, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3)'
+                  }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.5, duration: 0.6 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronRight size={24} className="md:w-8 md:h-8" />
+                </motion.button>
               </div>
               
               {/* Scene indicator */}
@@ -826,7 +850,7 @@ const ScrollStorySystem: React.FC = () => {
       
       {/* Scroll progress indicator */}
       <motion.div
-        className="fixed bottom-20 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+        className="fixed bottom-20 md:bottom-8 left-1/2 -translate-x-1/2 z-30"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
