@@ -352,6 +352,42 @@ const ScrollStorySystem: React.FC = () => {
   const [isSnapping, setIsSnapping] = useState(false);
   const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  // Autoplay functions
+  const startAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+    }
+    
+    if (isAutoPlaying && currentScene < storyScenes.length - 1) {
+      autoPlayRef.current = setTimeout(() => {
+        goToNextSlide();
+      }, 12000); // 12 seconds
+    }
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  };
+
+  const handleUserInteraction = () => {
+    setUserInteracted(true);
+    stopAutoPlay();
+    
+    // Resume autoplay after 3 seconds of no interaction
+    setTimeout(() => {
+      if (!userInteracted) {
+        setIsAutoPlaying(true);
+        startAutoPlay();
+      }
+    }, 3000);
+  };
 
   // Navigation functions
   const goToNextSlide = () => {
@@ -368,6 +404,15 @@ const ScrollStorySystem: React.FC = () => {
         top: targetScroll,
         behavior: 'smooth'
       });
+      
+      // Restart autoplay timer
+      if (isAutoPlaying) {
+        startAutoPlay();
+      }
+    } else {
+      // End of slides, stop autoplay
+      setIsAutoPlaying(false);
+      stopAutoPlay();
     }
   };
 
@@ -385,8 +430,19 @@ const ScrollStorySystem: React.FC = () => {
         top: targetScroll,
         behavior: 'smooth'
       });
+      
+      // Handle user interaction
+      handleUserInteraction();
     }
   };
+
+  // Start autoplay when component mounts and scene changes
+  useEffect(() => {
+    if (isInitialized && isAutoPlaying) {
+      startAutoPlay();
+    }
+    return () => stopAutoPlay();
+  }, [currentScene, isAutoPlaying, isInitialized]);
 
   useEffect(() => {
     const checkIsMobile = window.innerWidth <= 768;
@@ -397,6 +453,9 @@ const ScrollStorySystem: React.FC = () => {
       if (!containerRef.current) return;
       
       lastScrollTime = Date.now();
+      
+      // Handle user interaction (pause autoplay)
+      handleUserInteraction();
       
       // Don't update scenes while snapping
       if (isSnapping) return;
@@ -552,9 +611,11 @@ const ScrollStorySystem: React.FC = () => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
+        handleUserInteraction();
         goToPrevSlide();
       } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
+        handleUserInteraction();
         goToNextSlide();
       }
     };
@@ -583,6 +644,10 @@ const ScrollStorySystem: React.FC = () => {
       
       if (snapTimeoutRef.current) {
         clearTimeout(snapTimeoutRef.current);
+      }
+      
+      if (autoPlayRef.current) {
+        clearTimeout(autoPlayRef.current);
       }
     };
   }, []); // Remove currentScene dependency to prevent loops
@@ -636,7 +701,10 @@ const ScrollStorySystem: React.FC = () => {
         <>
           <div className="fixed inset-y-0 left-0 z-30 flex items-center">
             <motion.button
-              onClick={goToPrevSlide}
+              onClick={() => {
+                handleUserInteraction();
+                goToPrevSlide();
+              }}
               className="ml-4 p-3 md:p-4 rounded-full transition-all duration-300 bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl"
               style={{
                 backdropFilter: 'blur(10px)',
@@ -654,7 +722,10 @@ const ScrollStorySystem: React.FC = () => {
           
           <div className="fixed inset-y-0 right-0 z-30 flex items-center">
             <motion.button
-              onClick={goToNextSlide}
+              onClick={() => {
+                handleUserInteraction();
+                goToNextSlide();
+              }}
               disabled={currentScene === storyScenes.length - 1}
               className={`mr-4 p-3 md:p-4 rounded-full transition-all duration-300 ${
                 currentScene === storyScenes.length - 1 
@@ -761,7 +832,10 @@ const ScrollStorySystem: React.FC = () => {
               {/* Navigation arrows for first scene only */}
               <div className="flex justify-between items-center mb-8 px-8 max-w-4xl mx-auto">
                 <motion.button
-                  onClick={goToPrevSlide}
+                  onClick={() => {
+                    handleUserInteraction();
+                    goToPrevSlide();
+                  }}
                   disabled={currentScene === 0}
                   className="p-3 md:p-4 rounded-full transition-all duration-300 bg-gray-600/30 text-gray-400 cursor-not-allowed"
                   style={{
@@ -775,7 +849,10 @@ const ScrollStorySystem: React.FC = () => {
                 </motion.button>
                 
                 <motion.button
-                  onClick={goToNextSlide}
+                  onClick={() => {
+                    handleUserInteraction();
+                    goToNextSlide();
+                  }}
                   className="p-3 md:p-4 rounded-full transition-all duration-300 bg-green-600/80 hover:bg-green-500 text-white shadow-lg hover:shadow-xl"
                   style={{
                     backdropFilter: 'blur(10px)',
