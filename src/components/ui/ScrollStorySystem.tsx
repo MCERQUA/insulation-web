@@ -1027,9 +1027,7 @@ const ScrollStorySystem: React.FC = () => {
                 <div className="mb-8">
                   {/* Mobile version with line break */}
                   <div className="block md:hidden">
-                    <CinematicText
-                      text={currentStoryScene.subtitle}
-                      type="fade"
+                    <div 
                       className="text-2xl md:text-3xl font-bold text-yellow-300 tracking-wide"
                       style={{
                         textShadow: `
@@ -1039,9 +1037,7 @@ const ScrollStorySystem: React.FC = () => {
                           4px 4px 8px rgba(0, 0, 0, 0.8)
                         `
                       }}
-                      duration={0.6}
-                      delay={0.3}
-                      trigger={true}
+                      dangerouslySetInnerHTML={{ __html: currentStoryScene.subtitle }}
                     />
                   </div>
                   {/* Desktop version without line break */}
@@ -1184,9 +1180,7 @@ const ScrollStorySystem: React.FC = () => {
                   <div>
                     {/* Mobile version with line break */}
                     <div className="block md:hidden">
-                      <CinematicText
-                        text={currentStoryScene.subtitle}
-                        type="fade"
+                      <div 
                         className="text-lg md:text-xl font-bold text-yellow-300 tracking-wide"
                         style={{
                           textShadow: `
@@ -1196,9 +1190,7 @@ const ScrollStorySystem: React.FC = () => {
                             3px 3px 6px rgba(0, 0, 0, 0.8)
                           `
                         }}
-                        duration={0.6}
-                        delay={0.3}
-                        trigger={true}
+                        dangerouslySetInnerHTML={{ __html: currentStoryScene.subtitle }}
                       />
                     </div>
                     {/* Desktop version without line break */}
