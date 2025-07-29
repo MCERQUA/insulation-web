@@ -119,7 +119,14 @@ export function MetalMenuBar({ items = defaultNavItems, className }: MetalMenuBa
                 )}
               >
                 {/* Always show text */}
-                <span className="relative z-10">{item.name}</span>
+                <span 
+                  className="relative z-10"
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.6)'
+                  }}
+                >
+                  {item.name}
+                </span>
                 
                 {/* Active indicator with target red theme */}
                 {isActive && (

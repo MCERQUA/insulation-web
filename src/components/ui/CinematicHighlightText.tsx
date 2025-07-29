@@ -400,7 +400,8 @@ const CinematicHighlightText: React.FC<CinematicHighlightTextProps> = ({
                 className={`${colorClass} font-bold`}
                 style={{
                   ...baseStyle,
-                  filter: 'drop-shadow(0 0 8px currentColor)'
+                  filter: 'drop-shadow(0 0 8px currentColor)',
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.6)'
                 }}
                 animate={shouldAnimate ? highlightAnimation : {}}
               >

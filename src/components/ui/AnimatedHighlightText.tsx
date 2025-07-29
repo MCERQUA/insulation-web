@@ -136,7 +136,8 @@ const AnimatedHighlightText: React.FC<AnimatedHighlightTextProps> = ({
           key={`highlight-${index}`}
           className={`inline-block font-bold ${getColorClasses(highlight.color)}`}
           style={{
-            filter: 'drop-shadow(0 0 8px currentColor)'
+            filter: 'drop-shadow(0 0 8px currentColor)',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.6)'
           }}
           initial={{ opacity: 0 }}
           animate={shouldAnimate ? { opacity: 1, ...animationProps.animate } : { opacity: 0 }}
