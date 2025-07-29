@@ -37,7 +37,7 @@ const storyScenes: StoryScene[] = [
     background: 'from-blue-900/20 to-indigo-900/20',
     highlights: [
       { text: "SHINING", color: 'yellow', animation: 'glow' },
-      { text: "LIGHT", color: 'blue', animation: 'pulse' }
+      { text: "LIGHT", color: 'yellow', animation: 'glow' }
     ]
   },
   {
@@ -510,16 +510,14 @@ const ScrollStorySystem: React.FC = () => {
       setPreviousBackgroundImage(backgroundImage);
       setIsTransitioning(true);
       
-      // Small delay to ensure previous image is set
+      // Set new image immediately
+      setBackgroundImage(newImage);
+      
+      // Complete transition after animation
       setTimeout(() => {
-        setBackgroundImage(newImage);
-        
-        // Complete transition after animation
-        setTimeout(() => {
-          setIsTransitioning(false);
-          setPreviousBackgroundImage(newImage);
-        }, 1000); // Match the transition duration
-      }, 50);
+        setIsTransitioning(false);
+        setPreviousBackgroundImage(newImage);
+      }, 800); // Match the transition duration
     }
   };
 
@@ -858,32 +856,66 @@ const ScrollStorySystem: React.FC = () => {
 
   return (
     <>
-      {/* Dynamic background images with crossfade */}
-      {/* Previous background layer - visible when not transitioning or during fade out */}
-      <motion.div
-        className="fixed inset-0 z-0"
-        style={{
-          backgroundImage: `url('${previousBackgroundImage}')`,
-          backgroundSize: currentScene === 0 ? 'cover' : (isMobile ? 'contain' : 'cover'),
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-        animate={{ opacity: isTransitioning ? 0 : 1 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-      />
-      
-      {/* Current background layer - visible when transitioning or when transition complete */}
-      <motion.div
-        className="fixed inset-0 z-1"
-        style={{
-          backgroundImage: `url('${backgroundImage}')`,
-          backgroundSize: currentScene === 0 ? 'cover' : (isMobile ? 'contain' : 'cover'),
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-        animate={{ opacity: isTransitioning ? 1 : 0 }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-      />
+      {/* Background image system */}
+      {isMobile ? (
+        /* Mobile: Simple crossfade */
+        <>
+          <motion.div
+            className="fixed inset-0 z-0"
+            style={{
+              backgroundImage: `url('${previousBackgroundImage}')`,
+              backgroundSize: currentScene === 0 ? 'cover' : 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            animate={{ opacity: isTransitioning ? 0 : 1 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="fixed inset-0 z-1"
+            style={{
+              backgroundImage: `url('${backgroundImage}')`,
+              backgroundSize: currentScene === 0 ? 'cover' : 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            animate={{ opacity: isTransitioning ? 1 : 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+        </>
+      ) : (
+        /* Desktop: Fade-to-black transitions */
+        <>
+          {/* Black base layer */}
+          <div className="fixed inset-0 z-0 bg-black" />
+          
+          {/* Previous image - fades out to black */}
+          <motion.div
+            className="fixed inset-0 z-1"
+            style={{
+              backgroundImage: `url('${previousBackgroundImage}')`,
+              backgroundSize: currentScene === 0 ? 'cover' : 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            animate={{ opacity: isTransitioning ? 0 : 1 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          />
+          
+          {/* Current image - fades in from black */}
+          <motion.div
+            className="fixed inset-0 z-2"
+            style={{
+              backgroundImage: `url('${backgroundImage}')`,
+              backgroundSize: currentScene === 0 ? 'cover' : 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+            animate={{ opacity: isTransitioning ? 1 : 0 }}
+            transition={{ duration: 0.4, delay: isTransitioning ? 0.4 : 0, ease: "easeInOut" }}
+          />
+        </>
+      )}
       
       {/* Gradient overlay */}
       <motion.div

@@ -84,12 +84,14 @@ const SimpleCinematicHighlightText: React.FC<SimpleCinematicHighlightTextProps> 
       case 'glow':
         return {
           textShadow: [
-            '0 0 5px currentColor',
+            '0 0 10px currentColor, 0 0 20px currentColor',
+            '0 0 30px currentColor, 0 0 50px currentColor, 0 0 70px currentColor',
             '0 0 20px currentColor, 0 0 30px currentColor',
-            '0 0 5px currentColor'
+            '0 0 10px currentColor, 0 0 15px currentColor'
           ],
+          scale: [1, 1.02, 1],
           transition: {
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
           }
@@ -118,7 +120,7 @@ const SimpleCinematicHighlightText: React.FC<SimpleCinematicHighlightTextProps> 
       case 'green':
         return 'text-green-400';
       case 'yellow':
-        return 'text-yellow-400';
+        return 'text-yellow-200';
       default:
         return '';
     }
