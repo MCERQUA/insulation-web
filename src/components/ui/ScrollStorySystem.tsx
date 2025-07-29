@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CinematicText from './CinematicText';
 import ColdClimateStamp from './ColdClimateStamp';
-import CinematicHighlightText from './CinematicHighlightText';
+import SimpleCinematicHighlightText from './SimpleCinematicHighlightText';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HighlightConfig {
@@ -702,7 +702,7 @@ const ScrollStorySystem: React.FC = () => {
               
               {/* Description */}
               <div className="mb-8">
-                <CinematicHighlightText
+                <SimpleCinematicHighlightText
                   text={currentStoryScene.description}
                   type={currentStoryScene.textAnimation}
                   highlights={currentStoryScene.highlights}
@@ -840,7 +840,7 @@ const ScrollStorySystem: React.FC = () => {
               >
                 {/* Description */}
                 <div className="mb-8">
-                  <CinematicHighlightText
+                  <SimpleCinematicHighlightText
                     text={currentStoryScene.description}
                     type={currentStoryScene.textAnimation}
                     highlights={currentStoryScene.highlights}
